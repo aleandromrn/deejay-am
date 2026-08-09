@@ -584,6 +584,68 @@
       margin-top:10px;
     }
 
+    .checkbox-group{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+
+    .check{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-height:48px;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      background:#0b0b11;
+      border-radius:15px;
+      color:#e7e7ec;
+      cursor:pointer;
+    }
+
+    .check input{
+      width:18px;
+      height:18px;
+      margin:0;
+      accent-color:var(--gold);
+    }
+
+    .consent{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:13px 14px;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:rgba(255,255,255,.025);
+      color:#c7c7cf;
+      font-size:13px;
+    }
+
+    .consent input{
+      width:18px;
+      height:18px;
+      margin-top:1px;
+      flex:0 0 auto;
+      accent-color:var(--gold);
+    }
+
+    .honeypot{
+      position:absolute !important;
+      left:-9999px !important;
+      width:1px !important;
+      height:1px !important;
+      overflow:hidden !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+    }
+
+    .submit-row{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
     .faq{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -726,6 +788,7 @@
       .photo:first-child{grid-column:auto}
       .form-grid{grid-template-columns:1fr}
       .field.full{grid-column:auto}
+      .checkbox-group{grid-template-columns:1fr}
       .faq{grid-template-columns:1fr}
       section{padding:76px 0}
       .profile-panel img{height:420px}
@@ -892,7 +955,7 @@
           <div>
             <div class="eyebrow">Booking</div>
             <h2>Prépare ta demande.</h2>
-            <p>Remplis le formulaire. Le bouton ouvre ensuite ton application e-mail avec toutes les informations déjà écrites.</p>
+            <p>Remplis le formulaire directement sur le site. Après l’envoi, je reçois les informations sur info@deejayam.com.</p>
           </div>
 
           <div class="contact-list">
@@ -907,42 +970,159 @@
           </div>
         </div>
 
-        <form class="booking-form reveal" id="bookingForm">
+        <form class="booking-form reveal"
+              action="https://formsubmit.co/info@deejayam.com"
+              method="POST">
+
+          <input type="hidden" name="_subject" value="Nouvelle demande de réservation - Deejay AM">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://deejayam.com/merci.html">
+          <input type="hidden" name="_autoresponse" value="Merci pour ta demande auprès de Deejay AM. J’ai bien reçu les informations de ton événement. Je te répondrai dès que possible.">
+
+          <div class="honeypot" aria-hidden="true">
+            <label for="website">Ne pas remplir ce champ</label>
+            <input type="text" id="website" name="_honey" tabindex="-1" autocomplete="off">
+          </div>
+
           <div class="form-grid">
             <div class="field">
-              <label for="name">Ton prénom</label>
-              <input id="name" name="name" autocomplete="name" required>
+              <label for="fullname">Nom et prénom *</label>
+              <input id="fullname"
+                     name="Nom et prénom"
+                     autocomplete="name"
+                     placeholder="Jean Dupont"
+                     required>
             </div>
 
             <div class="field">
-              <label for="type">Type d’événement</label>
-              <select id="type" name="type" required>
+              <label for="phone">Numéro de téléphone *</label>
+              <input id="phone"
+                     name="Téléphone"
+                     type="tel"
+                     inputmode="tel"
+                     autocomplete="tel"
+                     placeholder="0470 12 34 56"
+                     required>
+            </div>
+
+            <div class="field">
+              <label for="email">Adresse e-mail *</label>
+              <input id="email"
+                     name="email"
+                     type="email"
+                     autocomplete="email"
+                     placeholder="exemple@email.com"
+                     required>
+            </div>
+
+            <div class="field">
+              <label for="type">Type d’événement *</label>
+              <select id="type" name="Type d’événement" required>
                 <option value="">Choisir</option>
-                <option>Anniversaire</option>
-                <option>Soirée privée</option>
-                <option>Événement</option>
-                <option>Autre</option>
+                <option value="Anniversaire">Anniversaire</option>
+                <option value="Soirée privée">Soirée privée</option>
+                <option value="Fête de famille">Fête de famille</option>
+                <option value="Événement">Événement</option>
+                <option value="Autre">Autre</option>
               </select>
             </div>
 
             <div class="field">
-              <label for="date">Date</label>
-              <input id="date" name="date" type="date">
+              <label for="date">Date de l’événement *</label>
+              <input id="date"
+                     name="Date"
+                     type="date"
+                     required>
             </div>
 
             <div class="field">
-              <label for="location">Lieu</label>
-              <input id="location" name="location" placeholder="Ville ou salle">
+              <label for="guests">Nombre d’invités</label>
+              <input id="guests"
+                     name="Nombre d’invités"
+                     type="number"
+                     min="1"
+                     inputmode="numeric"
+                     placeholder="80">
+            </div>
+
+            <div class="field">
+              <label for="start">Heure de début</label>
+              <input id="start"
+                     name="Heure de début"
+                     type="time">
+            </div>
+
+            <div class="field">
+              <label for="end">Heure de fin</label>
+              <input id="end"
+                     name="Heure de fin"
+                     type="time">
             </div>
 
             <div class="field full">
-              <label for="message">Informations</label>
-              <textarea id="message" name="message" placeholder="Horaires, nombre d’invités, type de musique, informations utiles..."></textarea>
+              <label for="location">Lieu de l’événement *</label>
+              <input id="location"
+                     name="Lieu"
+                     autocomplete="street-address"
+                     placeholder="Ville ou nom de la salle"
+                     required>
             </div>
 
             <div class="field full">
-              <button class="btn primary" type="submit">Envoyer la demande par e-mail</button>
-              <div class="form-note">Aucune donnée n’est stockée sur le site. Le formulaire prépare simplement un e-mail.</div>
+              <label for="music">Styles de musique souhaités</label>
+              <input id="music"
+                     name="Styles de musique"
+                     placeholder="Commercial, années 80, house, rap...">
+            </div>
+
+            <div class="field full">
+              <label>Prestations souhaitées</label>
+              <div class="checkbox-group">
+                <label class="check">
+                  <input type="checkbox" name="DJ" value="Demandé">
+                  <span>DJ</span>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" name="Sonorisation" value="Demandée">
+                  <span>Sonorisation</span>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" name="Éclairage" value="Demandé">
+                  <span>Éclairage</span>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" name="Micro" value="Demandé">
+                  <span>Micro</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label for="message">Informations supplémentaires</label>
+              <textarea id="message"
+                        name="Message"
+                        placeholder="Horaires particuliers, ambiance recherchée, déroulement de la soirée, informations utiles..."></textarea>
+            </div>
+
+            <div class="field full">
+              <label class="consent">
+                <input type="checkbox"
+                       name="Autorisation de contact"
+                       value="Oui"
+                       required>
+                <span>J’accepte d’être recontacté au sujet de cette demande. *</span>
+              </label>
+            </div>
+
+            <div class="field full submit-row">
+              <button class="btn primary" type="submit">Envoyer ma demande</button>
+              <div class="form-note">
+                Les informations sont envoyées à info@deejayam.com via FormSubmit.
+                Lors du tout premier test, FormSubmit demandera d’activer cette adresse e-mail.
+              </div>
             </div>
           </div>
         </form>
@@ -961,7 +1141,7 @@
         <div class="faq">
           <details class="reveal">
             <summary>Comment demander une réservation ?</summary>
-            <p>Utilise le formulaire du site, l’adresse info@deejayam.com ou Instagram @deejay__am.</p>
+            <p>Remplis le formulaire du site. La demande arrive directement sur info@deejayam.com. Tu peux aussi me contacter sur Instagram @deejay__am.</p>
           </details>
 
           <details class="reveal">
@@ -1005,39 +1185,6 @@
 
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => navLinks.classList.remove('open'));
-    });
-
-    const bookingForm = document.getElementById('bookingForm');
-    bookingForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById('name').value.trim();
-      const type = document.getElementById('type').value;
-      const date = document.getElementById('date').value || 'Non précisée';
-      const location = document.getElementById('location').value.trim() || 'Non précisé';
-      const message = document.getElementById('message').value.trim() || 'Aucune information supplémentaire';
-
-      const subject = `Demande de réservation - ${type || 'Événement'} - ${name}`;
-      const body =
-`Bonjour,
-
-Je souhaite demander des informations pour une prestation Deejay AM.
-
-Prénom : ${name}
-Type d'événement : ${type}
-Date : ${date}
-Lieu : ${location}
-
-Informations :
-${message}
-
-Merci.`;
-
-      window.location.href =
-        'mailto:info@deejayam.com?subject=' +
-        encodeURIComponent(subject) +
-        '&body=' +
-        encodeURIComponent(body);
     });
 
     const lightbox = document.getElementById('lightbox');
