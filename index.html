@@ -584,169 +584,55 @@
       margin-top:10px;
     }
 
-    .date-picker-wrap{
-      position:relative;
-    }
-
-    .date-trigger{
+    .native-date-wrap{
       width:100%;
-      min-height:49px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:13px 14px;
+      gap:10px;
+      padding:12px 14px;
       border:1px solid var(--line);
       background:#0b0b11;
-      color:#fff;
       border-radius:15px;
-      text-align:left;
-      cursor:pointer;
       transition:.2s;
     }
 
-    .date-trigger:hover,
-    .date-trigger[aria-expanded="true"]{
+    .native-date-wrap:focus-within{
       border-color:rgba(216,180,107,.55);
       box-shadow:0 0 0 3px rgba(216,180,107,.08);
     }
 
-    .date-trigger-placeholder{
-      color:#8f8f9a;
-    }
-
-    .date-trigger-icon{
-      display:grid;
-      place-items:center;
+    .native-date-icon{
       width:30px;
       height:30px;
       flex:0 0 auto;
+      display:grid;
+      place-items:center;
       border-radius:10px;
       color:var(--gold2);
       background:rgba(216,180,107,.10);
       border:1px solid rgba(216,180,107,.18);
       font-size:15px;
+      pointer-events:none;
     }
 
-    .calendar-popover{
-      position:absolute;
-      z-index:40;
-      top:calc(100% + 10px);
-      left:0;
-      width:min(360px,92vw);
-      padding:16px;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:20px;
-      background:rgba(12,12,18,.98);
-      box-shadow:0 24px 70px rgba(0,0,0,.46);
-      backdrop-filter:blur(14px);
-      display:none;
-    }
-
-    .calendar-popover.open{
+    .native-date-wrap input[type="date"]{
       display:block;
-      animation:calendarIn .16s ease;
-    }
-
-    @keyframes calendarIn{
-      from{opacity:0;transform:translateY(-5px)}
-      to{opacity:1;transform:none}
-    }
-
-    .calendar-head{
-      display:grid;
-      grid-template-columns:40px 1fr 40px;
-      align-items:center;
-      gap:8px;
-      margin-bottom:14px;
-    }
-
-    .calendar-title{
-      text-align:center;
-      font-weight:850;
-      text-transform:capitalize;
-    }
-
-    .calendar-nav{
-      width:40px;
-      height:40px;
-      display:grid;
-      place-items:center;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.035);
-      color:#fff;
-      cursor:pointer;
-      font-size:18px;
-    }
-
-    .calendar-nav:hover{
-      border-color:rgba(216,180,107,.35);
-      color:var(--gold2);
-    }
-
-    .calendar-weekdays,
-    .calendar-days{
-      display:grid;
-      grid-template-columns:repeat(7,1fr);
-      gap:6px;
-    }
-
-    .calendar-weekdays{
-      margin-bottom:6px;
-    }
-
-    .calendar-weekdays span{
-      text-align:center;
-      color:#858591;
-      font-size:11px;
-      font-weight:800;
-      text-transform:uppercase;
-    }
-
-    .calendar-day{
-      aspect-ratio:1;
+      width:100%;
       min-width:0;
-      display:grid;
-      place-items:center;
+      padding:0;
       border:0;
-      border-radius:11px;
+      outline:0;
       background:transparent;
-      color:#e8e8ed;
+      color:#fff;
+      font:inherit;
+      color-scheme:dark;
       cursor:pointer;
-      font-size:13px;
-      transition:.15s;
     }
 
-    .calendar-day:hover:not(:disabled){
-      background:rgba(216,180,107,.10);
-      color:var(--gold2);
-    }
-
-    .calendar-day.today{
-      box-shadow:inset 0 0 0 1px rgba(216,180,107,.45);
-    }
-
-    .calendar-day.selected{
-      background:linear-gradient(135deg,var(--gold2),var(--gold));
-      color:#171107;
-      font-weight:900;
-    }
-
-    .calendar-day:disabled{
-      color:#454550;
-      cursor:not-allowed;
-    }
-
-    .calendar-empty{
-      aspect-ratio:1;
-    }
-
-    .date-error{
-      min-height:18px;
-      margin-top:6px;
-      color:#f29b9b;
-      font-size:12px;
+    .native-date-wrap input[type="date"]::-webkit-calendar-picker-indicator{
+      cursor:pointer;
+      opacity:.9;
+      filter:invert(88%) sepia(18%) saturate(652%) hue-rotate(359deg) brightness(94%);
     }
 
     .checkbox-group{
@@ -1194,53 +1080,14 @@
             </div>
 
             <div class="field">
-              <label for="datePickerTrigger">Date de l’événement *</label>
-
-              <div class="date-picker-wrap">
-                <input id="dateValue" name="Date" type="hidden">
-
-                <button class="date-trigger"
-                        id="datePickerTrigger"
-                        type="button"
-                        aria-haspopup="dialog"
-                        aria-expanded="false">
-                  <span id="dateDisplay" class="date-trigger-placeholder">Choisir une date</span>
-                  <span class="date-trigger-icon" aria-hidden="true">▦</span>
-                </button>
-
-                <div class="calendar-popover"
-                     id="calendarPopover"
-                     role="dialog"
-                     aria-label="Choisir la date de l’événement">
-                  <div class="calendar-head">
-                    <button class="calendar-nav"
-                            id="calendarPrev"
-                            type="button"
-                            aria-label="Mois précédent">‹</button>
-
-                    <div class="calendar-title" id="calendarTitle"></div>
-
-                    <button class="calendar-nav"
-                            id="calendarNext"
-                            type="button"
-                            aria-label="Mois suivant">›</button>
-                  </div>
-
-                  <div class="calendar-weekdays" aria-hidden="true">
-                    <span>Lu</span>
-                    <span>Ma</span>
-                    <span>Me</span>
-                    <span>Je</span>
-                    <span>Ve</span>
-                    <span>Sa</span>
-                    <span>Di</span>
-                  </div>
-
-                  <div class="calendar-days" id="calendarDays"></div>
-                </div>
+              <label for="date">Date de l’événement *</label>
+              <div class="native-date-wrap">
+                <span class="native-date-icon" aria-hidden="true">▦</span>
+                <input id="date"
+                       name="Date"
+                       type="date"
+                       required>
               </div>
-
-              <div class="date-error" id="dateError" aria-live="polite"></div>
             </div>
 
             <div class="field">
@@ -1394,169 +1241,14 @@
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
 
-    const bookingForm = document.querySelector('.booking-form');
-    const dateValue = document.getElementById('dateValue');
-    const dateDisplay = document.getElementById('dateDisplay');
-    const dateError = document.getElementById('dateError');
-    const datePickerTrigger = document.getElementById('datePickerTrigger');
-    const calendarPopover = document.getElementById('calendarPopover');
-    const calendarTitle = document.getElementById('calendarTitle');
-    const calendarDays = document.getElementById('calendarDays');
-    const calendarPrev = document.getElementById('calendarPrev');
-    const calendarNext = document.getElementById('calendarNext');
-
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    let visibleMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-    let selectedDate = null;
-
-    const monthFormatter = new Intl.DateTimeFormat('fr-BE', {
-      month: 'long',
-      year: 'numeric'
-    });
-
-    const selectedDateFormatter = new Intl.DateTimeFormat('fr-BE', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    });
-
-    function isoDate(date){
-      const y = date.getFullYear();
-      const m = String(date.getMonth() + 1).padStart(2, '0');
-      const d = String(date.getDate()).padStart(2, '0');
-      return `${y}-${m}-${d}`;
+    const eventDateInput = document.getElementById('date');
+    if (eventDateInput) {
+      const localToday = new Date();
+      const yyyy = localToday.getFullYear();
+      const mm = String(localToday.getMonth() + 1).padStart(2, '0');
+      const dd = String(localToday.getDate()).padStart(2, '0');
+      eventDateInput.min = `${yyyy}-${mm}-${dd}`;
     }
-
-    function sameDate(a, b){
-      return a &&
-             b &&
-             a.getFullYear() === b.getFullYear() &&
-             a.getMonth() === b.getMonth() &&
-             a.getDate() === b.getDate();
-    }
-
-    function renderCalendar(){
-      calendarTitle.textContent = monthFormatter.format(visibleMonth);
-      calendarDays.innerHTML = '';
-
-      const year = visibleMonth.getFullYear();
-      const month = visibleMonth.getMonth();
-      const first = new Date(year, month, 1);
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-      // JavaScript: dimanche = 0. On convertit pour commencer la semaine le lundi.
-      const leadingEmpty = (first.getDay() + 6) % 7;
-
-      for(let i = 0; i < leadingEmpty; i++){
-        const empty = document.createElement('span');
-        empty.className = 'calendar-empty';
-        calendarDays.appendChild(empty);
-      }
-
-      for(let day = 1; day <= daysInMonth; day++){
-        const date = new Date(year, month, day);
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'calendar-day';
-        button.textContent = day;
-        button.setAttribute('aria-label', selectedDateFormatter.format(date));
-
-        if(date < today){
-          button.disabled = true;
-        }
-
-        if(sameDate(date, today)){
-          button.classList.add('today');
-        }
-
-        if(sameDate(date, selectedDate)){
-          button.classList.add('selected');
-        }
-
-        button.addEventListener('click', () => {
-          selectedDate = date;
-          dateValue.value = isoDate(date);
-          dateDisplay.textContent = selectedDateFormatter.format(date);
-          dateDisplay.classList.remove('date-trigger-placeholder');
-          dateError.textContent = '';
-          closeCalendar();
-          renderCalendar();
-        });
-
-        calendarDays.appendChild(button);
-      }
-
-      const previousMonthEnd = new Date(
-        visibleMonth.getFullYear(),
-        visibleMonth.getMonth(),
-        0
-      );
-      calendarPrev.disabled = previousMonthEnd < today;
-    }
-
-    function openCalendar(){
-      calendarPopover.classList.add('open');
-      datePickerTrigger.setAttribute('aria-expanded', 'true');
-      renderCalendar();
-    }
-
-    function closeCalendar(){
-      calendarPopover.classList.remove('open');
-      datePickerTrigger.setAttribute('aria-expanded', 'false');
-    }
-
-    datePickerTrigger.addEventListener('click', () => {
-      if(calendarPopover.classList.contains('open')){
-        closeCalendar();
-      } else {
-        openCalendar();
-      }
-    });
-
-    calendarPrev.addEventListener('click', () => {
-      visibleMonth = new Date(
-        visibleMonth.getFullYear(),
-        visibleMonth.getMonth() - 1,
-        1
-      );
-      renderCalendar();
-    });
-
-    calendarNext.addEventListener('click', () => {
-      visibleMonth = new Date(
-        visibleMonth.getFullYear(),
-        visibleMonth.getMonth() + 1,
-        1
-      );
-      renderCalendar();
-    });
-
-    document.addEventListener('click', (event) => {
-      if(
-        calendarPopover.classList.contains('open') &&
-        !calendarPopover.contains(event.target) &&
-        !datePickerTrigger.contains(event.target)
-      ){
-        closeCalendar();
-      }
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if(event.key === 'Escape'){
-        closeCalendar();
-      }
-    });
-
-    bookingForm.addEventListener('submit', (event) => {
-      if(!dateValue.value){
-        event.preventDefault();
-        dateError.textContent = 'Choisis la date de l’événement.';
-        datePickerTrigger.focus();
-        openCalendar();
-      }
-    });
 
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
