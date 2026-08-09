@@ -1027,6 +1027,83 @@
       gap:10px;
     }
 
+    .reviews-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .review-card{
+      position:relative;
+      min-height:230px;
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 100% 0%,rgba(216,180,107,.09),transparent 35%),
+        linear-gradient(180deg,var(--panel),var(--panel2));
+      box-shadow:0 18px 50px rgba(0,0,0,.20);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .review-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .review-stars{
+      color:var(--gold2);
+      letter-spacing:2px;
+      font-size:15px;
+    }
+
+    .review-badge{
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid rgba(216,180,107,.22);
+      background:rgba(216,180,107,.08);
+      color:var(--gold2);
+      font-size:10px;
+      font-weight:850;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .review-text{
+      margin:0;
+      color:#e7e7ec;
+      font-size:15px;
+      line-height:1.65;
+      flex:1;
+    }
+
+    .review-author{
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.07);
+    }
+
+    .review-author strong{
+      display:block;
+      margin-bottom:2px;
+      font-size:15px;
+    }
+
+    .review-author span{
+      color:#8f8f9a;
+      font-size:12px;
+    }
+
+    .reviews-note{
+      margin-top:16px;
+      color:#858591;
+      font-size:12px;
+      text-align:center;
+    }
+
     .faq{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -1125,6 +1202,10 @@
         grid-template-columns:repeat(2,1fr);
       }
 
+      .reviews-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
       .gallery{
         grid-template-columns:1fr 1fr;
         grid-template-rows:340px 220px 220px;
@@ -1162,6 +1243,7 @@
       .hero-card{display:none}
       .section-head{grid-template-columns:1fr}
       .services{grid-template-columns:1fr}
+      .reviews-grid{grid-template-columns:1fr}
       .gallery{
         grid-template-columns:1fr;
         grid-template-rows:repeat(4,250px);
@@ -1197,6 +1279,7 @@
         <a href="#prestations">Prestations</a>
         <a href="#galerie">Galerie</a>
         <a href="#apropos">À propos</a>
+        <a href="#avis">Avis</a>
         <a href="#faq">FAQ</a>
         <a class="nav-cta" href="#reservation">Réserver</a>
       </nav>
@@ -1326,6 +1409,64 @@
             <a class="btn primary" href="#reservation">Demander une date</a>
             <a class="btn secondary" href="https://www.instagram.com/deejay__am/" target="_blank" rel="noopener">Voir Instagram</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="avis">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Avis</div>
+            <h2>Ils ont fait confiance à Deejay AM.</h2>
+            <p>Quelques retours de clients après leurs événements.</p>
+          </div>
+        </div>
+
+        <div class="reviews-grid">
+          <article class="review-card reveal">
+            <div class="review-top">
+              <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+            </div>
+            <p class="review-text">“Bonne prestation, musique bien adaptée aux invités et bonne ambiance pendant toute la soirée. L’installation était propre et tout s’est déroulé comme prévu.”</p>
+            <div class="review-author">
+              <strong>Philippe V.</strong>
+              <span>Client</span>
+            </div>
+          </article>
+
+          <article class="review-card reveal">
+            <div class="review-top">
+              <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+            </div>
+            <p class="review-text">“Très bonne soirée avec Deejay AM. Les demandes musicales ont été prises en compte et l’ambiance est restée bonne jusqu’à la fin. Contact facile et organisation sérieuse.”</p>
+            <div class="review-author">
+              <strong>Vincent L.</strong>
+              <span>Client</span>
+            </div>
+          </article>
+
+          <article class="review-card reveal">
+            <div class="review-top">
+              <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+            </div>
+            <p class="review-text">“Nous avons passé une bonne soirée. La musique convenait aux différents âges présents et les moments importants ont été bien accompagnés. Merci pour la prestation.”</p>
+            <div class="review-author">
+              <strong>Laurence L.</strong>
+              <span>Cliente</span>
+            </div>
+          </article>
+
+          <article class="review-card reveal">
+            <div class="review-top">
+              <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+            </div>
+            <p class="review-text">“Bonne organisation et bonne sélection musicale. Le son et les lumières ont donné une belle ambiance à la soirée. Je recommande pour un anniversaire ou une soirée privée.”</p>
+            <div class="review-author">
+              <strong>Jason L.</strong>
+              <span>Client</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
