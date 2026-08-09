@@ -584,26 +584,37 @@
       margin-top:10px;
     }
 
-    .native-date-wrap{
+    .picker-trigger{
       width:100%;
+      min-height:49px;
       display:flex;
       align-items:center;
-      gap:10px;
-      padding:12px 14px;
+      justify-content:space-between;
+      gap:12px;
+      padding:13px 14px;
       border:1px solid var(--line);
       background:#0b0b11;
+      color:#fff;
       border-radius:15px;
+      text-align:left;
+      cursor:pointer;
       transition:.2s;
     }
 
-    .native-date-wrap:focus-within{
+    .picker-trigger:hover,
+    .picker-trigger:focus-visible{
       border-color:rgba(216,180,107,.55);
       box-shadow:0 0 0 3px rgba(216,180,107,.08);
+      outline:none;
     }
 
-    .native-date-icon{
-      width:30px;
-      height:30px;
+    .picker-placeholder{
+      color:#8f8f9a;
+    }
+
+    .picker-icon{
+      width:31px;
+      height:31px;
       flex:0 0 auto;
       display:grid;
       place-items:center;
@@ -612,27 +623,252 @@
       background:rgba(216,180,107,.10);
       border:1px solid rgba(216,180,107,.18);
       font-size:15px;
-      pointer-events:none;
     }
 
-    .native-date-wrap input[type="date"]{
-      display:block;
-      width:100%;
-      min-width:0;
+    .picker-dialog{
+      width:min(390px,calc(100vw - 28px));
       padding:0;
-      border:0;
-      outline:0;
-      background:transparent;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:24px;
+      background:#0d0d14;
       color:#fff;
-      font:inherit;
-      color-scheme:dark;
-      cursor:pointer;
+      box-shadow:0 30px 90px rgba(0,0,0,.62);
+      overflow:hidden;
     }
 
-    .native-date-wrap input[type="date"]::-webkit-calendar-picker-indicator{
+    .picker-dialog::backdrop{
+      background:rgba(0,0,0,.72);
+      backdrop-filter:blur(6px);
+    }
+
+    .picker-shell{
+      padding:18px;
+    }
+
+    .picker-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .picker-top strong{
+      font-size:17px;
+    }
+
+    .picker-close{
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      color:#fff;
       cursor:pointer;
-      opacity:.9;
-      filter:invert(88%) sepia(18%) saturate(652%) hue-rotate(359deg) brightness(94%);
+      font-size:20px;
+    }
+
+    .calendar-head{
+      display:grid;
+      grid-template-columns:42px 1fr 42px;
+      align-items:center;
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .calendar-title{
+      text-align:center;
+      text-transform:capitalize;
+      font-weight:850;
+      color:#f0f0f4;
+    }
+
+    .calendar-nav{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:13px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      color:#fff;
+      cursor:pointer;
+      font-size:20px;
+    }
+
+    .calendar-nav:hover:not(:disabled){
+      color:var(--gold2);
+      border-color:rgba(216,180,107,.32);
+    }
+
+    .calendar-nav:disabled{
+      opacity:.28;
+      cursor:not-allowed;
+    }
+
+    .calendar-weekdays,
+    .calendar-days{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:6px;
+    }
+
+    .calendar-weekdays{
+      margin-bottom:6px;
+    }
+
+    .calendar-weekdays span{
+      text-align:center;
+      color:#777784;
+      font-size:11px;
+      font-weight:850;
+      text-transform:uppercase;
+    }
+
+    .calendar-empty{
+      aspect-ratio:1;
+    }
+
+    .calendar-day{
+      aspect-ratio:1;
+      display:grid;
+      place-items:center;
+      border:0;
+      border-radius:12px;
+      background:transparent;
+      color:#ececf1;
+      cursor:pointer;
+      font-size:13px;
+      transition:.15s;
+    }
+
+    .calendar-day:hover:not(:disabled){
+      color:var(--gold2);
+      background:rgba(216,180,107,.10);
+    }
+
+    .calendar-day.today{
+      box-shadow:inset 0 0 0 1px rgba(216,180,107,.45);
+    }
+
+    .calendar-day.selected{
+      color:#171107;
+      font-weight:900;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+    }
+
+    .calendar-day:disabled{
+      color:#3f3f49;
+      cursor:not-allowed;
+    }
+
+    .time-display{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      margin:4px 0 18px;
+    }
+
+    .time-box{
+      min-width:78px;
+      padding:13px 12px;
+      border-radius:17px;
+      border:1px solid rgba(216,180,107,.18);
+      background:rgba(216,180,107,.08);
+      color:var(--gold2);
+      text-align:center;
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:.02em;
+    }
+
+    .time-colon{
+      color:#bdbdc6;
+      font-size:25px;
+      font-weight:900;
+    }
+
+    .time-section-label{
+      margin:13px 0 8px;
+      color:#8f8f9a;
+      font-size:11px;
+      font-weight:850;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .time-grid{
+      display:grid;
+      grid-template-columns:repeat(6,1fr);
+      gap:7px;
+    }
+
+    .minute-grid{
+      grid-template-columns:repeat(4,1fr);
+    }
+
+    .time-choice{
+      min-height:40px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      color:#eaeaf0;
+      cursor:pointer;
+      transition:.15s;
+    }
+
+    .time-choice:hover{
+      color:var(--gold2);
+      border-color:rgba(216,180,107,.32);
+    }
+
+    .time-choice.selected{
+      color:#171107;
+      border-color:transparent;
+      font-weight:900;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+    }
+
+    .picker-actions{
+      display:flex;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .picker-actions button{
+      flex:1;
+      min-height:44px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:850;
+    }
+
+    .picker-cancel{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      color:#fff;
+    }
+
+    .picker-confirm{
+      border:0;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#171107;
+    }
+
+    .picker-error{
+      min-height:17px;
+      margin-top:6px;
+      color:#f29b9b;
+      font-size:12px;
+    }
+
+    @media(max-width:520px){
+      .time-grid{
+        grid-template-columns:repeat(4,1fr);
+      }
     }
 
     .checkbox-group{
@@ -1080,14 +1316,17 @@
             </div>
 
             <div class="field">
-              <label for="date">Date de l’événement *</label>
-              <div class="native-date-wrap">
-                <span class="native-date-icon" aria-hidden="true">▦</span>
-                <input id="date"
-                       name="Date"
-                       type="date"
-                       required>
-              </div>
+              <label for="dateTrigger">Date de l’événement *</label>
+              <input id="dateValue" name="Date" type="hidden">
+
+              <button class="picker-trigger"
+                      id="dateTrigger"
+                      type="button">
+                <span id="dateText" class="picker-placeholder">Choisir une date</span>
+                <span class="picker-icon" aria-hidden="true">▦</span>
+              </button>
+
+              <div class="picker-error" id="dateError" aria-live="polite"></div>
             </div>
 
             <div class="field">
@@ -1101,17 +1340,29 @@
             </div>
 
             <div class="field">
-              <label for="start">Heure de début</label>
-              <input id="start"
-                     name="Heure de début"
-                     type="time">
+              <label for="startTrigger">Heure de début</label>
+              <input id="startValue" name="Heure de début" type="hidden">
+
+              <button class="picker-trigger time-trigger"
+                      id="startTrigger"
+                      type="button"
+                      data-time-target="start">
+                <span id="startText" class="picker-placeholder">Choisir l’heure</span>
+                <span class="picker-icon" aria-hidden="true">◷</span>
+              </button>
             </div>
 
             <div class="field">
-              <label for="end">Heure de fin</label>
-              <input id="end"
-                     name="Heure de fin"
-                     type="time">
+              <label for="endTrigger">Heure de fin</label>
+              <input id="endValue" name="Heure de fin" type="hidden">
+
+              <button class="picker-trigger time-trigger"
+                      id="endTrigger"
+                      type="button"
+                      data-time-target="end">
+                <span id="endText" class="picker-placeholder">Choisir l’heure</span>
+                <span class="picker-icon" aria-hidden="true">◷</span>
+              </button>
             </div>
 
             <div class="field full">
@@ -1224,6 +1475,54 @@
     </div>
   </footer>
 
+
+  <dialog class="picker-dialog" id="dateDialog">
+    <div class="picker-shell">
+      <div class="picker-top">
+        <strong>Choisir une date</strong>
+        <button class="picker-close" id="dateClose" type="button" aria-label="Fermer">×</button>
+      </div>
+
+      <div class="calendar-head">
+        <button class="calendar-nav" id="calendarPrev" type="button" aria-label="Mois précédent">‹</button>
+        <div class="calendar-title" id="calendarTitle"></div>
+        <button class="calendar-nav" id="calendarNext" type="button" aria-label="Mois suivant">›</button>
+      </div>
+
+      <div class="calendar-weekdays" aria-hidden="true">
+        <span>Lu</span><span>Ma</span><span>Me</span><span>Je</span><span>Ve</span><span>Sa</span><span>Di</span>
+      </div>
+
+      <div class="calendar-days" id="calendarDays"></div>
+    </div>
+  </dialog>
+
+  <dialog class="picker-dialog" id="timeDialog">
+    <div class="picker-shell">
+      <div class="picker-top">
+        <strong id="timeDialogTitle">Choisir une heure</strong>
+        <button class="picker-close" id="timeClose" type="button" aria-label="Fermer">×</button>
+      </div>
+
+      <div class="time-display" aria-live="polite">
+        <div class="time-box" id="timeHourDisplay">20</div>
+        <div class="time-colon">:</div>
+        <div class="time-box" id="timeMinuteDisplay">00</div>
+      </div>
+
+      <div class="time-section-label">Heure</div>
+      <div class="time-grid" id="hourGrid"></div>
+
+      <div class="time-section-label">Minutes</div>
+      <div class="time-grid minute-grid" id="minuteGrid"></div>
+
+      <div class="picker-actions">
+        <button class="picker-cancel" id="timeCancel" type="button">Annuler</button>
+        <button class="picker-confirm" id="timeConfirm" type="button">Choisir cette heure</button>
+      </div>
+    </div>
+  </dialog>
+
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button id="closeLightbox" aria-label="Fermer">×</button>
     <img id="lightboxImg" alt="">
@@ -1241,13 +1540,303 @@
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
 
-    const eventDateInput = document.getElementById('date');
-    if (eventDateInput) {
-      const localToday = new Date();
-      const yyyy = localToday.getFullYear();
-      const mm = String(localToday.getMonth() + 1).padStart(2, '0');
-      const dd = String(localToday.getDate()).padStart(2, '0');
-      eventDateInput.min = `${yyyy}-${mm}-${dd}`;
+
+    // Sélecteur de date
+    const bookingForm = document.querySelector('.booking-form');
+    const dateTrigger = document.getElementById('dateTrigger');
+    const dateDialog = document.getElementById('dateDialog');
+    const dateClose = document.getElementById('dateClose');
+    const dateValue = document.getElementById('dateValue');
+    const dateText = document.getElementById('dateText');
+    const dateError = document.getElementById('dateError');
+    const calendarTitle = document.getElementById('calendarTitle');
+    const calendarDays = document.getElementById('calendarDays');
+    const calendarPrev = document.getElementById('calendarPrev');
+    const calendarNext = document.getElementById('calendarNext');
+
+    const nowForPicker = new Date();
+    const pickerToday = new Date(
+      nowForPicker.getFullYear(),
+      nowForPicker.getMonth(),
+      nowForPicker.getDate()
+    );
+
+    let pickerMonth = new Date(
+      pickerToday.getFullYear(),
+      pickerToday.getMonth(),
+      1
+    );
+
+    let pickedDate = null;
+
+    const monthFormat = new Intl.DateTimeFormat('fr-BE', {
+      month: 'long',
+      year: 'numeric'
+    });
+
+    const fullDateFormat = new Intl.DateTimeFormat('fr-BE', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    function formatIsoDate(date){
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function isSameDay(a,b){
+      return !!a && !!b &&
+        a.getFullYear() === b.getFullYear() &&
+        a.getMonth() === b.getMonth() &&
+        a.getDate() === b.getDate();
+    }
+
+    function renderDateCalendar(){
+      calendarTitle.textContent = monthFormat.format(pickerMonth);
+      calendarDays.innerHTML = '';
+
+      const year = pickerMonth.getFullYear();
+      const month = pickerMonth.getMonth();
+      const firstDay = new Date(year, month, 1);
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const blanks = (firstDay.getDay() + 6) % 7;
+
+      for(let i = 0; i < blanks; i++){
+        const empty = document.createElement('span');
+        empty.className = 'calendar-empty';
+        calendarDays.appendChild(empty);
+      }
+
+      for(let day = 1; day <= totalDays; day++){
+        const date = new Date(year, month, day);
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'calendar-day';
+        button.textContent = day;
+        button.setAttribute('aria-label', fullDateFormat.format(date));
+
+        if(date < pickerToday){
+          button.disabled = true;
+        }
+
+        if(isSameDay(date, pickerToday)){
+          button.classList.add('today');
+        }
+
+        if(isSameDay(date, pickedDate)){
+          button.classList.add('selected');
+        }
+
+        button.addEventListener('click', () => {
+          pickedDate = date;
+          dateValue.value = formatIsoDate(date);
+          dateText.textContent = fullDateFormat.format(date);
+          dateText.classList.remove('picker-placeholder');
+          dateError.textContent = '';
+          dateDialog.close();
+        });
+
+        calendarDays.appendChild(button);
+      }
+
+      const previousMonthLastDay = new Date(year, month, 0);
+      calendarPrev.disabled = previousMonthLastDay < pickerToday;
+    }
+
+    if(dateTrigger && dateDialog){
+      dateTrigger.addEventListener('click', () => {
+        renderDateCalendar();
+        if(typeof dateDialog.showModal === 'function'){
+          dateDialog.showModal();
+        } else {
+          dateDialog.setAttribute('open','');
+        }
+      });
+
+      dateClose.addEventListener('click', () => dateDialog.close());
+
+      dateDialog.addEventListener('click', (event) => {
+        const rect = dateDialog.getBoundingClientRect();
+        const inside =
+          event.clientX >= rect.left &&
+          event.clientX <= rect.right &&
+          event.clientY >= rect.top &&
+          event.clientY <= rect.bottom;
+
+        if(!inside){
+          dateDialog.close();
+        }
+      });
+
+      calendarPrev.addEventListener('click', () => {
+        pickerMonth = new Date(
+          pickerMonth.getFullYear(),
+          pickerMonth.getMonth() - 1,
+          1
+        );
+        renderDateCalendar();
+      });
+
+      calendarNext.addEventListener('click', () => {
+        pickerMonth = new Date(
+          pickerMonth.getFullYear(),
+          pickerMonth.getMonth() + 1,
+          1
+        );
+        renderDateCalendar();
+      });
+    }
+
+    // Sélecteur d'heure
+    const timeDialog = document.getElementById('timeDialog');
+    const timeClose = document.getElementById('timeClose');
+    const timeCancel = document.getElementById('timeCancel');
+    const timeConfirm = document.getElementById('timeConfirm');
+    const timeDialogTitle = document.getElementById('timeDialogTitle');
+    const timeHourDisplay = document.getElementById('timeHourDisplay');
+    const timeMinuteDisplay = document.getElementById('timeMinuteDisplay');
+    const hourGrid = document.getElementById('hourGrid');
+    const minuteGrid = document.getElementById('minuteGrid');
+
+    let activeTimeTarget = 'start';
+    let selectedHour = 20;
+    let selectedMinute = 0;
+
+    const timeValues = {
+      start: '',
+      end: ''
+    };
+
+    function renderTimeChoices(){
+      hourGrid.innerHTML = '';
+      minuteGrid.innerHTML = '';
+
+      for(let hour = 0; hour < 24; hour++){
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'time-choice';
+        button.textContent = String(hour).padStart(2,'0');
+
+        if(hour === selectedHour){
+          button.classList.add('selected');
+        }
+
+        button.addEventListener('click', () => {
+          selectedHour = hour;
+          timeHourDisplay.textContent = String(hour).padStart(2,'0');
+          renderTimeChoices();
+        });
+
+        hourGrid.appendChild(button);
+      }
+
+      [0,15,30,45].forEach(minute => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'time-choice';
+        button.textContent = String(minute).padStart(2,'0');
+
+        if(minute === selectedMinute){
+          button.classList.add('selected');
+        }
+
+        button.addEventListener('click', () => {
+          selectedMinute = minute;
+          timeMinuteDisplay.textContent = String(minute).padStart(2,'0');
+          renderTimeChoices();
+        });
+
+        minuteGrid.appendChild(button);
+      });
+    }
+
+    function openTimePicker(target){
+      activeTimeTarget = target;
+
+      const existing = timeValues[target];
+      if(existing){
+        const [h,m] = existing.split(':').map(Number);
+        selectedHour = h;
+        selectedMinute = m;
+      } else {
+        selectedHour = target === 'start' ? 20 : 2;
+        selectedMinute = 0;
+      }
+
+      timeDialogTitle.textContent =
+        target === 'start' ? 'Heure de début' : 'Heure de fin';
+
+      timeHourDisplay.textContent = String(selectedHour).padStart(2,'0');
+      timeMinuteDisplay.textContent = String(selectedMinute).padStart(2,'0');
+
+      renderTimeChoices();
+
+      if(typeof timeDialog.showModal === 'function'){
+        timeDialog.showModal();
+      } else {
+        timeDialog.setAttribute('open','');
+      }
+    }
+
+    document.querySelectorAll('.time-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        openTimePicker(trigger.dataset.timeTarget);
+      });
+    });
+
+    timeClose.addEventListener('click', () => timeDialog.close());
+    timeCancel.addEventListener('click', () => timeDialog.close());
+
+    timeConfirm.addEventListener('click', () => {
+      const value =
+        String(selectedHour).padStart(2,'0') + ':' +
+        String(selectedMinute).padStart(2,'0');
+
+      timeValues[activeTimeTarget] = value;
+
+      const hidden = document.getElementById(activeTimeTarget + 'Value');
+      const text = document.getElementById(activeTimeTarget + 'Text');
+
+      hidden.value = value;
+      text.textContent = value;
+      text.classList.remove('picker-placeholder');
+
+      timeDialog.close();
+    });
+
+    timeDialog.addEventListener('click', (event) => {
+      const rect = timeDialog.getBoundingClientRect();
+      const inside =
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom;
+
+      if(!inside){
+        timeDialog.close();
+      }
+    });
+
+    // La date reste obligatoire avant l'envoi.
+    if(bookingForm){
+      bookingForm.addEventListener('submit', (event) => {
+        if(!dateValue.value){
+          event.preventDefault();
+          dateError.textContent = 'Choisis la date de l’événement.';
+          dateTrigger.focus();
+          renderDateCalendar();
+
+          if(typeof dateDialog.showModal === 'function'){
+            dateDialog.showModal();
+          } else {
+            dateDialog.setAttribute('open','');
+          }
+        }
+      });
     }
 
     const lightbox = document.getElementById('lightbox');
