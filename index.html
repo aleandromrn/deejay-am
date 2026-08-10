@@ -530,57 +530,6 @@
       color:var(--gold2);
     }
 
-    .whatsapp-float{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:90;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:13px 17px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(13,15,20,.94);
-      color:#fff;
-      box-shadow:0 15px 40px rgba(0,0,0,.38);
-      backdrop-filter:blur(12px);
-      transition:.2s ease;
-    }
-
-    .whatsapp-float:hover{
-      transform:translateY(-2px);
-      border-color:rgba(216,180,107,.52);
-      box-shadow:0 18px 48px rgba(0,0,0,.48);
-    }
-
-    .whatsapp-float-icon{
-      width:32px;
-      height:32px;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--gold2),var(--gold));
-      color:#151108;
-      font-weight:950;
-      font-size:13px;
-    }
-
-    .whatsapp-float-text{
-      display:grid;
-      line-height:1.1;
-    }
-
-    .whatsapp-float-text strong{
-      font-size:13px;
-    }
-
-    .whatsapp-float-text span{
-      margin-top:3px;
-      color:#a8a8b2;
-      font-size:10px;
-    }
-
     .booking-form{
       padding:28px;
     }
@@ -1292,16 +1241,6 @@
       .nav-cta{text-align:center}
       .hero{padding-top:104px}
       .hero-card{display:none}
-
-      .whatsapp-float{
-        right:14px;
-        bottom:14px;
-        padding:10px;
-      }
-
-      .whatsapp-float-text{
-        display:none;
-      }
       .section-head{grid-template-columns:1fr}
       .services{grid-template-columns:1fr}
       .reviews-grid{grid-template-columns:1fr}
@@ -1323,6 +1262,86 @@
       .reveal{opacity:1;transform:none;transition:none}
       .photo img,.btn{transition:none}
     }
+  
+    /* V17 PREMIUM : uniquement visuel, contenu et catégories inchangés */
+    :root{--mx:50vw;--my:25vh;--scroll-progress:0%;}
+
+    body::before{
+      content:"";position:fixed;inset:0;z-index:-20;pointer-events:none;
+      background:
+        radial-gradient(520px circle at var(--mx) var(--my),rgba(141,99,255,.12),transparent 62%),
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:auto,52px 52px,52px 52px;
+      mask-image:linear-gradient(to bottom,#000,transparent 90%);opacity:.7;
+    }
+    body::after{
+      content:"";position:fixed;inset:-20%;z-index:-19;pointer-events:none;
+      background:radial-gradient(circle at 18% 20%,rgba(141,99,255,.11),transparent 18%),
+                 radial-gradient(circle at 82% 28%,rgba(216,180,107,.09),transparent 19%),
+                 radial-gradient(circle at 58% 84%,rgba(61,194,255,.06),transparent 21%);
+      filter:blur(30px);animation:ambientShift 16s ease-in-out infinite alternate;
+    }
+    @keyframes ambientShift{from{transform:translate3d(-1.5%,-1%,0)}to{transform:translate3d(1.5%,1%,0) scale(1.045)}}
+
+    .topbar{box-shadow:0 10px 40px rgba(0,0,0,.18)}
+    .topbar::after{content:"";position:absolute;left:0;bottom:-1px;width:var(--scroll-progress);height:2px;background:linear-gradient(90deg,var(--violet),var(--gold2),var(--gold));box-shadow:0 0 14px rgba(216,180,107,.45)}
+    .brand img{transition:.35s ease}.brand:hover img{transform:rotate(-5deg) scale(1.06);box-shadow:0 0 32px rgba(141,99,255,.34)}
+    .navlinks a:not(.nav-cta){position:relative;padding:8px 0}
+    .navlinks a:not(.nav-cta)::after{content:"";position:absolute;left:50%;right:50%;bottom:1px;height:1px;background:linear-gradient(90deg,var(--violet),var(--gold2));transition:.24s ease}
+    .navlinks a:not(.nav-cta):hover::after,.navlinks a.active:not(.nav-cta)::after{left:0;right:0}
+    .navlinks a.active:not(.nav-cta){color:var(--gold2)}
+
+    .hero::before{background:linear-gradient(90deg,rgba(5,5,8,.96),rgba(5,5,8,.82) 40%,rgba(5,5,8,.40) 72%,rgba(5,5,8,.76)),url("gallery3.webp") center/cover no-repeat;animation:heroBreath 13s ease-in-out infinite alternate}
+    @keyframes heroBreath{from{transform:scale(1.015)}to{transform:scale(1.055)}}
+    .gradient-text{background-size:220% auto;animation:titleShimmer 7s linear infinite}
+    @keyframes titleShimmer{to{background-position:220% center}}
+    .dot{animation:liveDot 1.9s ease-in-out infinite}
+    @keyframes liveDot{0%,100%{transform:scale(.9);box-shadow:0 0 10px var(--gold)}50%{transform:scale(1.18);box-shadow:0 0 28px var(--gold)}}
+
+    .btn{position:relative;overflow:hidden;isolation:isolate;box-shadow:0 10px 24px rgba(0,0,0,.16)}
+    .btn:hover{transform:translateY(-3px) scale(1.012);box-shadow:0 16px 36px rgba(0,0,0,.25)}
+    .btn.secondary:hover{border-color:rgba(216,180,107,.32);background:rgba(216,180,107,.08)}
+    .btn.primary::before,.nav-cta::before{content:"";position:absolute;inset:-60% auto -60% -35%;width:28%;transform:rotate(18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.72),transparent);animation:buttonShine 4.5s ease-in-out infinite}
+    @keyframes buttonShine{0%,68%{left:-38%;opacity:0}75%{opacity:.85}92%,100%{left:116%;opacity:0}}
+    .chip{transition:.2s ease;backdrop-filter:blur(8px)}.chip:hover{transform:translateY(-2px);border-color:rgba(216,180,107,.30);background:rgba(216,180,107,.06)}
+
+    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.018)),rgba(10,10,15,.56);box-shadow:0 30px 80px rgba(0,0,0,.44),0 0 52px rgba(141,99,255,.08);transition:.45s ease;animation:cardFloat 6s ease-in-out infinite}
+    .hero-card:hover{transform:translateY(-7px) rotate(.45deg);box-shadow:0 36px 90px rgba(0,0,0,.5),0 0 70px rgba(141,99,255,.14)}
+    @keyframes cardFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+
+    section{position:relative}
+    section:not(.hero)::before{content:"";position:absolute;left:50%;top:0;width:min(1040px,82vw);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.065),rgba(216,180,107,.14),rgba(255,255,255,.065),transparent)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px}.eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--violet),var(--gold2));box-shadow:0 0 12px rgba(216,180,107,.25)}
+
+    .card,.review-card,.profile-panel,.about-panel,.booking-form,.booking-intro{position:relative;overflow:hidden;border-color:rgba(255,255,255,.105);box-shadow:0 16px 50px rgba(0,0,0,.18)}
+    .card::before,.review-card::before,.profile-panel::before,.about-panel::before,.booking-form::before,.booking-intro::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.055),transparent 24%,transparent 72%,rgba(216,180,107,.035));opacity:.65}
+    .card{transition:.32s ease}.card:hover{transform:translateY(-7px);border-color:rgba(216,180,107,.28);box-shadow:0 28px 65px rgba(0,0,0,.28),0 0 32px rgba(141,99,255,.055)}
+    .card .icon{transition:.32s ease}.card:hover .icon{transform:translateY(-3px) rotate(-3deg) scale(1.05)}
+
+    .photo{border-color:rgba(255,255,255,.11);box-shadow:0 18px 46px rgba(0,0,0,.22);transition:.35s ease}
+    .photo::after{content:"Voir";position:absolute;right:15px;bottom:15px;padding:7px 11px;border:1px solid rgba(255,255,255,.15);border-radius:999px;background:rgba(8,8,12,.70);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.28s ease;backdrop-filter:blur(10px)}
+    .photo:hover{transform:translateY(-5px);border-color:rgba(216,180,107,.30);box-shadow:0 26px 62px rgba(0,0,0,.32)}
+    .photo:hover::after{opacity:1;transform:none}.photo img{transition:.6s cubic-bezier(.2,.8,.2,1)}.photo:hover img{transform:scale(1.065);filter:saturate(1.08) contrast(1.03)}
+
+    .profile-panel,.about-panel,.review-card{transition:.35s ease}.profile-panel:hover,.about-panel:hover,.review-card:hover{transform:translateY(-5px);border-color:rgba(216,180,107,.25)}
+    .review-card::after{content:"“";position:absolute;right:18px;top:10px;color:rgba(216,180,107,.11);font-family:Georgia,serif;font-size:92px;line-height:1;pointer-events:none}
+    .review-stars{text-shadow:0 0 16px rgba(216,180,107,.27)}
+
+    .contact-link{transition:.25s ease}.contact-link:hover{transform:translateX(4px);border-color:rgba(216,180,107,.28);background:rgba(216,180,107,.055)}
+    .booking-form{box-shadow:0 30px 80px rgba(0,0,0,.30)}
+    .field input,.field select,.field textarea,.picker-trigger{transition:.22s ease}
+    .field input:focus,.field select:focus,.field textarea:focus,.picker-trigger:focus-visible{border-color:rgba(216,180,107,.50);background:#0d0d14;box-shadow:0 0 0 4px rgba(216,180,107,.075),0 12px 26px rgba(0,0,0,.14)}
+    .service-choice:hover .service-choice-body{transform:translateY(-3px);box-shadow:0 15px 34px rgba(0,0,0,.20)}
+    .faq details{transition:.25s ease}.faq details:hover{transform:translateY(-2px);border-color:rgba(216,180,107,.22);background:rgba(216,180,107,.035)}.faq details[open] summary{color:var(--gold2)}
+    dialog{box-shadow:0 34px 90px rgba(0,0,0,.65),0 0 60px rgba(141,99,255,.09)}
+    .lightbox{backdrop-filter:blur(18px)}
+    footer{position:relative;overflow:hidden}footer::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 0,rgba(141,99,255,.08),transparent 48%)}
+    .reveal{transform:translateY(24px) scale(.992)}.reveal.visible{transform:none}
+
+    @media(max-width:760px){body::before{background-size:auto,38px 38px,38px 38px;opacity:.45}.hero-card{animation:none}.photo::after{opacity:1;transform:none}}
+    @media(prefers-reduced-motion:reduce){body::after,.hero::before,.gradient-text,.dot,.hero-card,.nav-cta::before,.btn.primary::before{animation:none!important}}
+
   </style>
 </head>
 
@@ -1540,18 +1559,10 @@
           <div>
             <div class="eyebrow">Booking</div>
             <h2>Prépare ta demande.</h2>
-            <p>Remplis le formulaire directement sur le site ou contacte-moi au +32 465 76 41 09 par téléphone ou WhatsApp.</p>
+            <p>Remplis le formulaire directement sur le site. Après l’envoi, je reçois les informations sur info@deejayam.com.</p>
           </div>
 
           <div class="contact-list">
-            <a class="contact-link" href="tel:+32465764109">
-              <span>Téléphone</span>
-              <span>+32 465 76 41 09</span>
-            </a>
-            <a class="contact-link" href="https://wa.me/32465764109?text=Bonjour%20Deejay%20AM%2C%20je%20souhaite%20avoir%20des%20informations%20pour%20une%20prestation." target="_blank" rel="noopener">
-              <span>WhatsApp</span>
-              <span>Écrire un message</span>
-            </a>
             <a class="contact-link" href="mailto:info@deejayam.com">
               <span>E-mail</span>
               <span>info@deejayam.com</span>
@@ -1787,7 +1798,7 @@
         <div class="faq">
           <details class="reveal">
             <summary>Comment demander une réservation ?</summary>
-            <p>Remplis le formulaire du site. La demande arrive directement sur info@deejayam.com. Tu peux aussi me contacter au +32 465 76 41 09, sur WhatsApp, Instagram @deejay__am ou sur la page Facebook Deejay AM.</p>
+            <p>Remplis le formulaire du site. La demande arrive directement sur info@deejayam.com. Tu peux aussi me contacter sur Instagram @deejay__am ou sur la page Facebook Deejay AM.</p>
           </details>
 
           <details class="reveal">
@@ -1812,22 +1823,10 @@
   <footer>
     <div class="container footer-row">
       <span>© 2026 Deejay AM</span>
-      <span><a href="tel:+32465764109">+32 465 76 41 09</a> • deejayam.com • info@deejayam.com • <a href="https://www.facebook.com/profile.php?id=61592766824589" target="_blank" rel="noopener">Facebook</a></span>
+      <span>deejayam.com • info@deejayam.com • <a href="https://www.facebook.com/profile.php?id=61592766824589" target="_blank" rel="noopener">Facebook</a></span>
     </div>
   </footer>
 
-
-  <a class="whatsapp-float"
-     href="https://wa.me/32465764109?text=Bonjour%20Deejay%20AM%2C%20je%20souhaite%20avoir%20des%20informations%20pour%20une%20prestation."
-     target="_blank"
-     rel="noopener"
-     aria-label="Contacter Deejay AM sur WhatsApp">
-    <span class="whatsapp-float-icon">WA</span>
-    <span class="whatsapp-float-text">
-      <strong>WhatsApp</strong>
-      <span>+32 465 76 41 09</span>
-    </span>
-  </a>
 
   <dialog class="picker-dialog" id="dateDialog">
     <div class="picker-shell">
@@ -2228,6 +2227,30 @@
     }, { threshold: .12 });
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  
+    // V17 : effets visuels légers, contenu inchangé.
+    const premiumRoot = document.documentElement;
+    if(window.matchMedia('(pointer:fine)').matches){
+      window.addEventListener('pointermove',(e)=>{
+        premiumRoot.style.setProperty('--mx',e.clientX+'px');
+        premiumRoot.style.setProperty('--my',e.clientY+'px');
+      },{passive:true});
+    }
+    function premiumScroll(){
+      const max=document.documentElement.scrollHeight-window.innerHeight;
+      const pct=max>0?(window.scrollY/max)*100:0;
+      premiumRoot.style.setProperty('--scroll-progress',pct.toFixed(2)+'%');
+    }
+    premiumScroll();window.addEventListener('scroll',premiumScroll,{passive:true});
+    const premiumLinks=[...document.querySelectorAll('.navlinks a[href^="#"]')];
+    const premiumSections=premiumLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    if(premiumSections.length){
+      const premiumObserver=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{if(entry.isIntersecting){premiumLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id));}})
+      },{rootMargin:'-35% 0px -55% 0px',threshold:0});
+      premiumSections.forEach(s=>premiumObserver.observe(s));
+    }
+
   </script>
 </body>
 </html>
