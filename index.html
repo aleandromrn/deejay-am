@@ -1642,6 +1642,76 @@
     .address-suggestion-sub{margin-top:2px;color:#8d8d99;font-size:11px;line-height:1.35}
     .address-suggestions-status{padding:12px 14px;color:#8d8d99;font-size:12px}
 
+  
+    /* ===== V24 - Working in the Arts ===== */
+    .wia-notice{
+      display:grid;
+      grid-template-columns:42px minmax(0,1fr) auto;
+      gap:14px;
+      align-items:center;
+      margin-bottom:24px;
+      padding:16px 18px;
+      border:1px solid rgba(216,180,107,.22);
+      border-radius:18px;
+      background:
+        linear-gradient(135deg,rgba(216,180,107,.075),rgba(141,99,255,.035)),
+        #0b0b11;
+      box-shadow:0 14px 34px rgba(0,0,0,.16);
+    }
+
+    .wia-notice-icon{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:13px;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#171107;
+      font-size:20px;
+      font-weight:900;
+    }
+
+    .wia-notice strong{
+      display:block;
+      margin-bottom:3px;
+      color:#fff;
+      font-size:14px;
+    }
+
+    .wia-notice p{
+      margin:0;
+      color:#aaaab4;
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .wia-notice a{
+      padding:10px 13px;
+      border:1px solid rgba(216,180,107,.28);
+      border-radius:12px;
+      color:var(--gold2);
+      font-size:12px;
+      font-weight:820;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .wia-notice a:hover{
+      background:rgba(216,180,107,.07);
+      border-color:rgba(216,180,107,.44);
+    }
+
+    @media (max-width:700px){
+      .wia-notice{
+        grid-template-columns:42px minmax(0,1fr);
+      }
+
+      .wia-notice a{
+        grid-column:1 / -1;
+        text-align:center;
+      }
+    }
+
   </style>
 </head>
 
@@ -1857,6 +1927,18 @@
     </section>
 
     <section id="reservation">
+
+      <div class="container">
+        <div class="wia-notice reveal">
+          <span class="wia-notice-icon" aria-hidden="true">✓</span>
+          <div>
+            <strong>Avant la prestation</strong>
+            <p>Le client doit se rendre sur le site Working in the Arts et déclarer Deejay AM.</p>
+          </div>
+          <a href="https://www.workinginthearts.be/" target="_blank" rel="noopener">Working in the Arts</a>
+        </div>
+      </div>
+
       <div class="container booking">
         <div class="booking-intro reveal">
           <div>
