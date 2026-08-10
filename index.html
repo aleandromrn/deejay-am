@@ -1432,6 +1432,116 @@
       }
     }
 
+  
+    /* ===== V20 PERFORMANCE ===== */
+    body::before{
+      background:
+        radial-gradient(circle at 20% 12%,rgba(141,99,255,.07),transparent 28%),
+        radial-gradient(circle at 82% 30%,rgba(216,180,107,.05),transparent 24%);
+      background-size:auto;
+      mask-image:none;
+      opacity:.65;
+    }
+
+    body::after{
+      display:none!important;
+      animation:none!important;
+      filter:none!important;
+    }
+
+    .topbar::after{
+      display:none!important;
+    }
+
+    .hero::before{
+      animation:none!important;
+      transform:none!important;
+    }
+
+    .gradient-text,
+    .dot,
+    .hero-card,
+    .nav-cta::before,
+    .btn.primary::before{
+      animation:none!important;
+    }
+
+    .hero-card{
+      translate:none!important;
+      transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+    }
+
+    .hero-card:hover,
+    .card:hover,
+    .review-card:hover,
+    .profile-panel:hover,
+    .about-panel:hover,
+    .photo:hover{
+      transform:translateY(-3px)!important;
+    }
+
+    .card,
+    .review-card,
+    .hero-card,
+    .profile-panel,
+    .about-panel,
+    .booking-form,
+    .booking-intro,
+    .photo{
+      box-shadow:0 14px 34px rgba(0,0,0,.20)!important;
+    }
+
+    .photo:hover img{
+      transform:scale(1.025)!important;
+    }
+
+    .topbar,
+    .kicker,
+    .chip,
+    .whatsapp-float,
+    .contact-link{
+      backdrop-filter:none!important;
+      -webkit-backdrop-filter:none!important;
+    }
+
+    .whatsapp-float{
+      background:rgba(9,15,13,.96);
+    }
+
+    section{
+      content-visibility:auto;
+      contain-intrinsic-size:700px;
+    }
+
+    .hero{
+      content-visibility:visible;
+      contain-intrinsic-size:auto;
+    }
+
+    .reveal{
+      transform:translateY(10px);
+      transition:opacity .30s ease,transform .30s ease;
+    }
+
+    @media (max-width:760px){
+      .reveal{
+        transform:none!important;
+        opacity:1!important;
+      }
+
+      .card:hover,
+      .review-card:hover,
+      .profile-panel:hover,
+      .about-panel:hover,
+      .photo:hover,
+      .hero-card:hover,
+      .btn:hover,
+      .contact-link:hover,
+      .service-choice:hover .service-choice-body{
+        transform:none!important;
+      }
+    }
+
   </style>
 </head>
 
@@ -2325,26 +2435,26 @@
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   
-    // V17 : effets visuels légers, contenu inchangé.
-    const premiumRoot = document.documentElement;
-    if(window.matchMedia('(pointer:fine)').matches){
-      window.addEventListener('pointermove',(e)=>{
-        premiumRoot.style.setProperty('--mx',e.clientX+'px');
-        premiumRoot.style.setProperty('--my',e.clientY+'px');
-      },{passive:true});
-    }
-    function premiumScroll(){
-      const max=document.documentElement.scrollHeight-window.innerHeight;
-      const pct=max>0?(window.scrollY/max)*100:0;
-      premiumRoot.style.setProperty('--scroll-progress',pct.toFixed(2)+'%');
-    }
-    premiumScroll();window.addEventListener('scroll',premiumScroll,{passive:true});
+    // V20 : menu actif uniquement, sans suivi de souris ni recalcul permanent au scroll.
     const premiumLinks=[...document.querySelectorAll('.navlinks a[href^="#"]')];
-    const premiumSections=premiumLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const premiumSections=premiumLinks
+      .map(a=>document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
     if(premiumSections.length){
       const premiumObserver=new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{if(entry.isIntersecting){premiumLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id));}})
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            premiumLinks.forEach(a=>{
+              a.classList.toggle(
+                'active',
+                a.getAttribute('href')==='#'+entry.target.id
+              );
+            });
+          }
+        });
       },{rootMargin:'-35% 0px -55% 0px',threshold:0});
+
       premiumSections.forEach(s=>premiumObserver.observe(s));
     }
 
