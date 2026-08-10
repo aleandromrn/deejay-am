@@ -1611,6 +1611,37 @@
       }
     }
 
+  
+    /* ===== V23 - Autocomplétion d'adresse ===== */
+    .location-autocomplete-wrap{position:relative}
+    .address-suggestions{
+      position:absolute;left:0;right:0;top:calc(100% + 7px);z-index:65;
+      overflow:hidden;border:1px solid rgba(216,180,107,.24);border-radius:16px;
+      background:#0c0c13;box-shadow:0 22px 55px rgba(0,0,0,.46)
+    }
+    .address-suggestions[hidden]{display:none}
+    .address-suggestion{
+      width:100%;display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;
+      align-items:center;padding:11px 13px;border:0;border-bottom:1px solid rgba(255,255,255,.065);
+      background:transparent;color:#f2f2f6;text-align:left;cursor:pointer;font:inherit
+    }
+    .address-suggestion:last-child{border-bottom:0}
+    .address-suggestion:hover,.address-suggestion.active{
+      background:linear-gradient(90deg,rgba(216,180,107,.10),rgba(141,99,255,.055))
+    }
+    .address-pin{
+      width:34px;height:34px;display:grid;place-items:center;border-radius:11px;
+      border:1px solid rgba(216,180,107,.18);background:rgba(216,180,107,.065);
+      color:var(--gold2);font-size:17px
+    }
+    .address-suggestion-main{min-width:0}
+    .address-suggestion-title,.address-suggestion-sub{
+      display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+    }
+    .address-suggestion-title{color:#fff;font-size:13px;font-weight:820;line-height:1.35}
+    .address-suggestion-sub{margin-top:2px;color:#8d8d99;font-size:11px;line-height:1.35}
+    .address-suggestions-status{padding:12px 14px;color:#8d8d99;font-size:12px}
+
   </style>
 </head>
 
@@ -1965,29 +1996,39 @@
             <div class="field full">
               <label for="location">Lieu de l’événement *</label>
 
-              <div class="location-search">
-                <input id="location"
-                       name="Lieu"
-                       autocomplete="street-address"
-                       placeholder="Ville ou nom de la salle"
-                       required>
+              <div class="location-autocomplete-wrap">
+                <div class="location-search">
+                  <input id="location"
+                         name="Lieu"
+                         autocomplete="off"
+                         placeholder="Commence à taper une adresse ou le nom d’une salle"
+                         aria-autocomplete="list"
+                         aria-controls="addressSuggestions"
+                         aria-expanded="false"
+                         required>
 
-                <input type="hidden"
-                       id="mapsLinkValue"
-                       name="Lien Google Maps"
-                       value="">
+                  <input type="hidden" id="mapsLinkValue" name="Lien Google Maps" value="">
+                  <input type="hidden" id="locationLatitude" name="Latitude" value="">
+                  <input type="hidden" id="locationLongitude" name="Longitude" value="">
 
-                <button class="maps-search-btn"
-                        id="mapsSearchBtn"
-                        type="button"
-                        aria-label="Rechercher ce lieu sur Google Maps">
-                  <span class="maps-search-icon" aria-hidden="true">⌖</span>
-                  <span>Voir sur Google Maps</span>
-                </button>
+                  <button class="maps-search-btn"
+                          id="mapsSearchBtn"
+                          type="button"
+                          aria-label="Ouvrir ce lieu sur Google Maps">
+                    <span class="maps-search-icon" aria-hidden="true">⌖</span>
+                    <span>Google Maps</span>
+                  </button>
+                </div>
+
+                <div class="address-suggestions"
+                     id="addressSuggestions"
+                     role="listbox"
+                     aria-label="Suggestions d’adresses"
+                     hidden></div>
               </div>
 
               <div class="location-search-hint">
-                Entre le nom de la salle ou l’adresse. Un lien Google Maps correspondant sera automatiquement ajouté à la demande envoyée.
+                Tape quelques lettres puis choisis l’adresse exacte dans la liste. L’adresse sélectionnée et son lien Google Maps seront ajoutés au mail.
               </div>
             </div>
 
@@ -2548,37 +2589,240 @@
     }
 
   
-    // V22 : recherche Google Maps + lien envoyé avec le formulaire.
+    // V23 : suggestions d'adresses en direct + lien Google Maps exact dans le mail.
     const locationInput = document.getElementById('location');
     const mapsSearchBtn = document.getElementById('mapsSearchBtn');
     const mapsLinkValue = document.getElementById('mapsLinkValue');
+    const locationLatitude = document.getElementById('locationLatitude');
+    const locationLongitude = document.getElementById('locationLongitude');
+    const addressSuggestions = document.getElementById('addressSuggestions');
 
-    const buildMapsUrl = (query) =>
-      'https://www.google.com/maps/search/?api=1&query=' +
-      encodeURIComponent(query.trim());
+    const buildMapsSearchUrl = (query) =>
+      'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query.trim());
 
-    if(locationInput && mapsSearchBtn && mapsLinkValue){
-      const updateLocationData = () => {
-        const query = locationInput.value.trim();
-        mapsSearchBtn.disabled = query.length < 2;
-        mapsLinkValue.value = query.length >= 2 ? buildMapsUrl(query) : '';
+    if(locationInput && mapsSearchBtn && mapsLinkValue && locationLatitude && locationLongitude && addressSuggestions){
+      let debounceTimer = null;
+      let requestController = null;
+      let currentSuggestions = [];
+      let activeSuggestionIndex = -1;
+
+      const closeSuggestions = () => {
+        addressSuggestions.hidden = true;
+        addressSuggestions.innerHTML = '';
+        currentSuggestions = [];
+        activeSuggestionIndex = -1;
+        locationInput.setAttribute('aria-expanded','false');
       };
 
-      const openMapsSearch = () => {
+      const formatFeature = (feature) => {
+        const p = feature.properties || {};
+        const coords = feature.geometry?.coordinates || [];
+        const city = p.city || p.locality || p.district || p.county || '';
+        const street = [p.street,p.housenumber].filter(Boolean).join(' ');
+        const locality = [p.postcode,city].filter(Boolean).join(' ');
+        const full = [...new Set([
+          p.name && p.name !== p.street ? p.name : '',
+          street, locality, p.state, p.country
+        ].filter(Boolean))].join(', ');
+
+        return {
+          title: p.name || street || full || 'Adresse',
+          subtitle: [street,locality,p.country].filter(Boolean).join(', '),
+          label: full || [street,locality,p.country].filter(Boolean).join(', '),
+          lon: coords[0],
+          lat: coords[1]
+        };
+      };
+
+      const setSelectedAddress = (item) => {
+        locationInput.value = item.label;
+        locationLatitude.value = item.lat ?? '';
+        locationLongitude.value = item.lon ?? '';
+        mapsLinkValue.value =
+          item.lat != null && item.lon != null
+            ? 'https://www.google.com/maps/search/?api=1&query=' +
+              encodeURIComponent(`${item.lat},${item.lon}`)
+            : buildMapsSearchUrl(item.label);
+        mapsSearchBtn.disabled = false;
+        closeSuggestions();
+      };
+
+      const renderSuggestions = (items) => {
+        addressSuggestions.innerHTML = '';
+        currentSuggestions = items;
+        activeSuggestionIndex = -1;
+
+        if(!items.length){
+          addressSuggestions.innerHTML =
+            '<div class="address-suggestions-status">Aucune adresse trouvée.</div>';
+          addressSuggestions.hidden = false;
+          locationInput.setAttribute('aria-expanded','true');
+          return;
+        }
+
+        items.forEach((item,index) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'address-suggestion';
+          button.setAttribute('role','option');
+
+          const pin = document.createElement('span');
+          pin.className = 'address-pin';
+          pin.textContent = '⌖';
+
+          const text = document.createElement('span');
+          text.className = 'address-suggestion-main';
+
+          const title = document.createElement('span');
+          title.className = 'address-suggestion-title';
+          title.textContent = item.title;
+
+          const sub = document.createElement('span');
+          sub.className = 'address-suggestion-sub';
+          sub.textContent = item.subtitle || item.label;
+
+          text.append(title,sub);
+          button.append(pin,text);
+          button.addEventListener('mousedown',(event)=>{
+            event.preventDefault();
+            setSelectedAddress(item);
+          });
+          addressSuggestions.appendChild(button);
+        });
+
+        addressSuggestions.hidden = false;
+        locationInput.setAttribute('aria-expanded','true');
+      };
+
+      const updateActiveSuggestion = () => {
+        const buttons = [...addressSuggestions.querySelectorAll('.address-suggestion')];
+        buttons.forEach((button,index)=>{
+          const active = index === activeSuggestionIndex;
+          button.classList.toggle('active',active);
+          button.setAttribute('aria-selected',active ? 'true' : 'false');
+          if(active) button.scrollIntoView({block:'nearest'});
+        });
+      };
+
+      const fetchAddressSuggestions = async (query) => {
+        if(requestController) requestController.abort();
+        requestController = new AbortController();
+
+        addressSuggestions.innerHTML =
+          '<div class="address-suggestions-status">Recherche des adresses…</div>';
+        addressSuggestions.hidden = false;
+        locationInput.setAttribute('aria-expanded','true');
+
+        const endpoint =
+          'https://photon.komoot.io/api/?' +
+          new URLSearchParams({
+            q: query,
+            limit: '6',
+            lang: 'fr',
+            countrycode: 'BE',
+            lat: '50.50',
+            lon: '4.47',
+            zoom: '8',
+            location_bias_scale: '0.35'
+          }).toString();
+
+        try{
+          const response = await fetch(endpoint,{
+            signal:requestController.signal,
+            headers:{'Accept':'application/json'}
+          });
+          if(!response.ok) throw new Error('Recherche indisponible');
+
+          const data = await response.json();
+          const items = (data.features || [])
+            .map(formatFeature)
+            .filter(item => item.label && item.lat != null && item.lon != null);
+
+          const seen = new Set();
+          renderSuggestions(items.filter(item=>{
+            const key = `${item.label}|${item.lat}|${item.lon}`;
+            if(seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          }));
+        }catch(error){
+          if(error.name === 'AbortError') return;
+          addressSuggestions.innerHTML =
+            '<div class="address-suggestions-status">Suggestions momentanément indisponibles. Tu peux continuer à saisir l’adresse manuellement.</div>';
+          addressSuggestions.hidden = false;
+          locationInput.setAttribute('aria-expanded','true');
+        }
+      };
+
+      const onLocationInput = () => {
+        const query = locationInput.value.trim();
+        locationLatitude.value = '';
+        locationLongitude.value = '';
+        mapsLinkValue.value = query.length >= 2 ? buildMapsSearchUrl(query) : '';
+        mapsSearchBtn.disabled = query.length < 2;
+        clearTimeout(debounceTimer);
+
+        if(query.length < 3){
+          closeSuggestions();
+          return;
+        }
+
+        debounceTimer = setTimeout(()=>fetchAddressSuggestions(query),350);
+      };
+
+      locationInput.addEventListener('input',onLocationInput);
+
+      locationInput.addEventListener('keydown',(event)=>{
+        if(addressSuggestions.hidden || !currentSuggestions.length) return;
+
+        if(event.key === 'ArrowDown'){
+          event.preventDefault();
+          activeSuggestionIndex = (activeSuggestionIndex + 1) % currentSuggestions.length;
+          updateActiveSuggestion();
+        }else if(event.key === 'ArrowUp'){
+          event.preventDefault();
+          activeSuggestionIndex = activeSuggestionIndex <= 0
+            ? currentSuggestions.length - 1
+            : activeSuggestionIndex - 1;
+          updateActiveSuggestion();
+        }else if(event.key === 'Enter' && activeSuggestionIndex >= 0){
+          event.preventDefault();
+          setSelectedAddress(currentSuggestions[activeSuggestionIndex]);
+        }else if(event.key === 'Escape'){
+          closeSuggestions();
+        }
+      });
+
+      mapsSearchBtn.addEventListener('click',()=>{
         const query = locationInput.value.trim();
         if(query.length < 2) return;
-        window.open(buildMapsUrl(query), '_blank', 'noopener,noreferrer');
-      };
 
-      updateLocationData();
-      locationInput.addEventListener('input', updateLocationData);
-      locationInput.addEventListener('change', updateLocationData);
-      mapsSearchBtn.addEventListener('click', openMapsSearch);
+        const url =
+          locationLatitude.value && locationLongitude.value
+            ? 'https://www.google.com/maps/search/?api=1&query=' +
+              encodeURIComponent(`${locationLatitude.value},${locationLongitude.value}`)
+            : buildMapsSearchUrl(query);
+
+        window.open(url,'_blank','noopener,noreferrer');
+      });
+
+      document.addEventListener('click',(event)=>{
+        if(!addressSuggestions.contains(event.target) && event.target !== locationInput){
+          closeSuggestions();
+        }
+      });
 
       const bookingForm = locationInput.closest('form');
       if(bookingForm){
-        bookingForm.addEventListener('submit', updateLocationData);
+        bookingForm.addEventListener('submit',()=>{
+          const query = locationInput.value.trim();
+          if(!mapsLinkValue.value && query.length >= 2){
+            mapsLinkValue.value = buildMapsSearchUrl(query);
+          }
+        });
       }
+
+      mapsSearchBtn.disabled = locationInput.value.trim().length < 2;
     }
 
   </script>
