@@ -1542,6 +1542,75 @@
       }
     }
 
+  
+    /* ===== V21 - Recherche du lieu sur Google Maps ===== */
+    .location-search{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:10px;
+      align-items:stretch;
+    }
+
+    .location-search input{
+      min-width:0;
+    }
+
+    .maps-search-btn{
+      min-height:49px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:0 16px;
+      border:1px solid rgba(216,180,107,.24);
+      border-radius:15px;
+      background:
+        linear-gradient(135deg,rgba(216,180,107,.095),rgba(141,99,255,.045)),
+        #0b0b11;
+      color:#f4f1e9;
+      font:inherit;
+      font-size:13px;
+      font-weight:820;
+      white-space:nowrap;
+      cursor:pointer;
+      transition:border-color .2s ease,background .2s ease,transform .2s ease,opacity .2s ease;
+    }
+
+    .maps-search-btn:hover:not(:disabled){
+      transform:translateY(-1px);
+      border-color:rgba(216,180,107,.46);
+      background:
+        linear-gradient(135deg,rgba(216,180,107,.15),rgba(141,99,255,.075)),
+        #0d0d14;
+    }
+
+    .maps-search-btn:disabled{
+      opacity:.42;
+      cursor:not-allowed;
+    }
+
+    .maps-search-icon{
+      font-size:18px;
+      color:var(--gold2);
+    }
+
+    .location-search-hint{
+      margin-top:7px;
+      color:#82828e;
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    @media (max-width:650px){
+      .location-search{
+        grid-template-columns:1fr;
+      }
+
+      .maps-search-btn{
+        width:100%;
+      }
+    }
+
   </style>
 </head>
 
@@ -1895,11 +1964,31 @@
 
             <div class="field full">
               <label for="location">Lieu de l’événement *</label>
-              <input id="location"
-                     name="Lieu"
-                     autocomplete="street-address"
-                     placeholder="Ville ou nom de la salle"
-                     required>
+
+              <div class="location-search">
+                <input id="location"
+                       name="Lieu"
+                       autocomplete="street-address"
+                       placeholder="Ville ou nom de la salle"
+                       required>
+
+                <input type="hidden"
+                       id="mapsLinkValue"
+                       name="Lien Google Maps"
+                       value="">
+
+                <button class="maps-search-btn"
+                        id="mapsSearchBtn"
+                        type="button"
+                        aria-label="Rechercher ce lieu sur Google Maps">
+                  <span class="maps-search-icon" aria-hidden="true">⌖</span>
+                  <span>Voir sur Google Maps</span>
+                </button>
+              </div>
+
+              <div class="location-search-hint">
+                Entre le nom de la salle ou l’adresse. Un lien Google Maps correspondant sera automatiquement ajouté à la demande envoyée.
+              </div>
             </div>
 
             <div class="field full">
@@ -2456,6 +2545,40 @@
       },{rootMargin:'-35% 0px -55% 0px',threshold:0});
 
       premiumSections.forEach(s=>premiumObserver.observe(s));
+    }
+
+  
+    // V22 : recherche Google Maps + lien envoyé avec le formulaire.
+    const locationInput = document.getElementById('location');
+    const mapsSearchBtn = document.getElementById('mapsSearchBtn');
+    const mapsLinkValue = document.getElementById('mapsLinkValue');
+
+    const buildMapsUrl = (query) =>
+      'https://www.google.com/maps/search/?api=1&query=' +
+      encodeURIComponent(query.trim());
+
+    if(locationInput && mapsSearchBtn && mapsLinkValue){
+      const updateLocationData = () => {
+        const query = locationInput.value.trim();
+        mapsSearchBtn.disabled = query.length < 2;
+        mapsLinkValue.value = query.length >= 2 ? buildMapsUrl(query) : '';
+      };
+
+      const openMapsSearch = () => {
+        const query = locationInput.value.trim();
+        if(query.length < 2) return;
+        window.open(buildMapsUrl(query), '_blank', 'noopener,noreferrer');
+      };
+
+      updateLocationData();
+      locationInput.addEventListener('input', updateLocationData);
+      locationInput.addEventListener('change', updateLocationData);
+      mapsSearchBtn.addEventListener('click', openMapsSearch);
+
+      const bookingForm = locationInput.closest('form');
+      if(bookingForm){
+        bookingForm.addEventListener('submit', updateLocationData);
+      }
     }
 
   </script>
