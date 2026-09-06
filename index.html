@@ -793,6 +793,13 @@
       cursor:not-allowed;
     }
 
+    .calendar-day.booked{
+      color:#8a5a5a;
+      background:rgba(190,70,70,.10);
+      text-decoration:line-through;
+      opacity:.72;
+    }
+
     .time-display{
       display:flex;
       align-items:center;
@@ -2368,6 +2375,24 @@
     );
 
     let pickedDate = null;
+    const availabilityUrl = 'https://script.google.com/macros/s/AKfycbx0JBVn5nW0lvE6IH9h7KBNTZIKT1S5Gav8vgy5inrF_zQqjg_4OiqYgWQmpLnTjJ_uxw/exec';
+    let blockedDates = new Set();
+    let blockedDatesLoaded = false;
+
+    async function loadBlockedDates(){
+      try{
+        const response = await fetch(availabilityUrl, { cache: 'no-store' });
+        if(!response.ok) throw new Error('Réponse calendrier invalide');
+        const data = await response.json();
+        if(data && data.success && Array.isArray(data.datesBloquees)){
+          blockedDates = new Set(data.datesBloquees);
+          blockedDatesLoaded = true;
+          renderDateCalendar();
+        }
+      }catch(error){
+        console.warn('Dates indisponibles non chargées :', error);
+      }
+    }
 
     const monthFormat = new Intl.DateTimeFormat('fr-BE', {
       month: 'long',
@@ -2423,6 +2448,14 @@
           button.disabled = true;
         }
 
+        const isoDate = formatIsoDate(date);
+        if(blockedDates.has(isoDate)){
+          button.disabled = true;
+          button.classList.add('booked');
+          button.setAttribute('aria-label', fullDateFormat.format(date) + ' - Indisponible');
+          button.title = 'Date déjà réservée';
+        }
+
         if(isSameDay(date, pickerToday)){
           button.classList.add('today');
         }
@@ -2448,7 +2481,9 @@
     }
 
     if(dateTrigger && dateDialog){
+      loadBlockedDates();
       dateTrigger.addEventListener('click', () => {
+        loadBlockedDates();
         renderDateCalendar();
         if(typeof dateDialog.showModal === 'function'){
           dateDialog.showModal();
