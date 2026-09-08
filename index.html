@@ -2352,7 +2352,7 @@
   <footer>
     <div class="container footer-row">
       <span>© 2026 Deejay AM</span>
-      <span>deejayam.com • info@deejayam.com • <a href="https://www.tiktok.com/@deejay__am" target="_blank" rel="noopener">TikTok</a> • <a href="https://www.facebook.com/profile.php?id=61592766824589" target="_blank" rel="noopener">Facebook</a> • <a href="https://wa.me/32465764109?text=Bonjour%2C%20je%20souhaiterais%20avoir%20des%20informations%20pour%20une%20prestation%20Deejay%20AM." target="_blank" rel="noopener">WhatsApp</a> • <a class="admin-link" href="/backoffice/" target="_blank" rel="noopener noreferrer">⚙️ Back office</a></span>
+      <span>deejayam.com • info@deejayam.com • <a href="https://www.tiktok.com/@deejay__am" target="_blank" rel="noopener">TikTok</a> • <a href="https://www.facebook.com/profile.php?id=61592766824589" target="_blank" rel="noopener">Facebook</a> • <a href="https://wa.me/32465764109?text=Bonjour%2C%20je%20souhaiterais%20avoir%20des%20informations%20pour%20une%20prestation%20Deejay%20AM." target="_blank" rel="noopener">WhatsApp</a> • <a class="admin-link" href="https://admin.deejayam.com" target="_blank" rel="noopener noreferrer">⚙️ Back office</a></span>
     </div>
   </footer>
 
@@ -3078,6 +3078,72 @@
         navigator.sendBeacon(calendarWebhookUrl, JSON.stringify(payload));
       });
     }
+
+
+    // Statistiques anonymes du site pour le back-office Deejay AM.
+    const statsWebhookUrl = 'https://script.google.com/macros/s/AKfycbx0JBVn5nW0lvE6IH9h7KBNTZIKT1S5Gav8vgy5inrF_zQqjg_4OiqYgWQmpLnTjJ_uxw/exec';
+
+    function detectTrafficSource(){
+      const referrer = document.referrer || '';
+      if(!referrer) return 'Direct';
+
+      try{
+        const host = new URL(referrer).hostname.toLowerCase();
+        if(host.includes('google.')) return 'Google';
+        if(host.includes('instagram.com')) return 'Instagram';
+        if(host.includes('tiktok.com')) return 'TikTok';
+        if(host.includes('facebook.com') || host.includes('fb.com')) return 'Facebook';
+        if(host.includes('messenger.com')) return 'Messenger';
+        if(host.includes('bing.com')) return 'Bing';
+        if(host.includes('deejayam.com')) return 'Interne';
+        return host.replace(/^www\./,'') || 'Autre';
+      }catch(error){
+        return 'Autre';
+      }
+    }
+
+    function sendStat(type, value){
+      const payload = JSON.stringify({
+        _action: 'track_stat',
+        type: type,
+        page: window.location.pathname || '/',
+        value: value || ''
+      });
+
+      if(navigator.sendBeacon){
+        navigator.sendBeacon(statsWebhookUrl, payload);
+      }else{
+        fetch(statsWebhookUrl, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: payload,
+          keepalive: true
+        }).catch(()=>{});
+      }
+    }
+
+    // Une vue = un chargement de page.
+    sendStat('view', detectTrafficSource());
+
+    // Clics utiles visibles dans le back-office.
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a,button');
+      if(!link) return;
+
+      const href = (link.getAttribute('href') || '').toLowerCase();
+      const text = (link.textContent || '').trim().toLowerCase();
+      let label = '';
+
+      if(href.includes('wa.me') || text.includes('whatsapp')) label = 'WhatsApp';
+      else if(href.includes('instagram.com') || text.includes('instagram')) label = 'Instagram';
+      else if(href.includes('tiktok.com') || text.includes('tiktok')) label = 'TikTok';
+      else if(href.includes('facebook.com') || text.includes('facebook')) label = 'Facebook';
+      else if(href.includes('google.com/maps') || href.includes('g.page') || text.includes('google')) label = 'Google';
+      else if(href.includes('admin.deejayam.com') || text.includes('back office')) label = 'Back office';
+      else if(href === '#reservation' || text.includes('réserver') || text.includes('reservation')) label = 'Réserver';
+
+      if(label) sendStat('click', label);
+    }, {passive:true});
 
   </script>
 
