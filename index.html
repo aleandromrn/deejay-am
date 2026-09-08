@@ -1158,6 +1158,35 @@
       font-size:14px;
     }
 
+
+    .review-actions{
+      margin-top:24px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .review-form{
+      margin-top:24px;
+      padding:22px;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:18px;
+      background:rgba(255,255,255,.025);
+      box-shadow:0 16px 45px rgba(0,0,0,.14);
+    }
+    .review-form-grid{
+      display:grid;
+      grid-template-columns:1fr 180px;
+      gap:14px;
+    }
+    .review-form .field.full{grid-column:1/-1}
+    .review-form textarea{min-height:120px;resize:vertical}
+    .review-help{margin:10px 0 0;color:var(--muted);font-size:.9rem}
+    @media(max-width:700px){
+      .review-form-grid{grid-template-columns:1fr}
+      .review-form .field.full{grid-column:auto}
+    }
+
     footer{
       padding:30px 0 42px;
       border-top:1px solid rgba(255,255,255,.07);
@@ -1955,6 +1984,53 @@
             </div>
           </article>
         </div>
+
+        <div class="review-actions reveal">
+          <a class="btn primary" href="#laisser-un-avis">★★★★★ Laisser un avis</a>
+          <a class="btn secondary"
+             href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3ADeejay%20AM%0AN%3AAM%3BDeejay%3B%3B%3B%0ATEL%3BTYPE%3DCELL%3A%2B32465764109%0AEMAIL%3Ainfo%40deejayam.com%0AURL%3Ahttps%3A%2F%2Fdeejayam.com%0ANOTE%3ADJ%20pour%20anniversaires%2C%20soir%C3%A9es%20priv%C3%A9es%20et%20%C3%A9v%C3%A9nements.%0AEND%3AVCARD"
+             download="Deejay-AM.vcf">Ajouter Deejay AM à mes contacts</a>
+          <a class="btn secondary"
+             href="https://www.google.com/maps/place/Deejay+AM/@50.43711,4.1089262,12z/data=!3m1!4b1!4m6!3m5!1s0x6f8513d6f0ae70e9:0x50d1d2fb9696e1b9!8m2!3d50.437139!4d4.1913257!16s%2Fg%2F11nvsb6v2h?entry=ttu&g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D"
+             target="_blank" rel="noopener noreferrer">Voir Deejay AM sur Google</a>
+        </div>
+
+        <form id="laisser-un-avis" class="review-form reveal"
+              action="https://formsubmit.co/info@deejayam.com"
+              method="POST">
+          <input type="hidden" name="_subject" value="Nouvel avis client - Deejay AM">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://deejayam.com/merci.html">
+          <input type="hidden" name="Type de message" value="Avis client">
+
+          <div class="review-form-grid">
+            <div class="field">
+              <label for="reviewName">Nom ou prénom *</label>
+              <input id="reviewName" name="Nom du client" placeholder="Ton nom" required>
+            </div>
+
+            <div class="field">
+              <label for="reviewStars">Note *</label>
+              <select id="reviewStars" name="Note" required>
+                <option value="">Choisir</option>
+                <option value="5/5">★★★★★ 5/5</option>
+                <option value="4/5">★★★★☆ 4/5</option>
+                <option value="3/5">★★★☆☆ 3/5</option>
+                <option value="2/5">★★☆☆☆ 2/5</option>
+                <option value="1/5">★☆☆☆☆ 1/5</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="reviewText">Ton avis *</label>
+              <textarea id="reviewText" name="Avis" placeholder="Comment s’est passée la prestation ?" required></textarea>
+            </div>
+          </div>
+
+          <button class="btn primary" type="submit">Envoyer mon avis</button>
+          <p class="review-help">L’avis est envoyé à Deejay AM avant d’être ajouté publiquement au site.</p>
+        </form>
       </div>
     </section>
 
