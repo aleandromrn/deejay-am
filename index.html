@@ -1,105 +1,3187 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#050816">
-  <meta name="robots" content="noindex, nofollow">
-  <title>Deejay AM | Site temporairement hors ligne</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Deejay AM | DJ à La Louvière, Hainaut | Mariages et événements</title>
+ <meta name="description" content="Deejay AM, DJ à La Louvière et dans le Hainaut. Animation DJ pour mariages, anniversaires, soirées privées et événements. Sonorisation et éclairage.">
+  <meta name="theme-color" content="#08080c">
+<meta property="og:title" content="Deejay AM | DJ à La Louvière et dans le Hainaut">
+  <meta property="og:description" content="DJ pour mariages, anniversaires, soirées privées et événements à La Louvière et dans le Hainaut.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deejayam.com/">
+  <meta property="og:image" content="https://deejayam.com/logo.webp">
+  <link rel="icon" href="logo.webp">
+  <link rel="preload" as="image" href="gallery3.webp" fetchpriority="high">
+    <link rel="canonical" href="https://deejayam.com/">
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Deejay AM",
+  "url": "https://deejayam.com/",
+  "logo": "https://deejayam.com/logo.webp",
+  "image": "https://deejayam.com/logo.webp",
+  "telephone": "+32465764109",
+  "priceRange": "€€",
+  "description": "DJ à La Louvière et dans le Hainaut pour mariages, anniversaires, soirées privées et événements.",
+  "areaServed": [
+    "La Louvière",
+    "Hainaut"
+  ],
+  "sameAs": [
+    "https://www.instagram.com/deejay__am/",
+    "https://www.tiktok.com/@deejay__am",
+    "https://www.facebook.com/share/1LCA5VD5E7/"
+  ]
+}
+</script>
   <style>
-    :root {
-      color-scheme: dark;
-      --bg: #050816;
-      --panel: #0c1326;
-      --blue: #168bff;
-      --text: #f5f8ff;
-      --muted: #a8b4c9;
+    :root{
+      --bg:#08080c;
+      --bg2:#0e0e15;
+      --panel:rgba(255,255,255,.055);
+      --panel2:rgba(255,255,255,.035);
+      --line:rgba(255,255,255,.10);
+      --text:#f7f7f9;
+      --muted:#b8b8c2;
+      --gold:#d8b46b;
+      --gold2:#f0d79d;
+      --violet:#8d63ff;
+      --violet2:#5d33d9;
+      --radius:24px;
+      --shadow:0 24px 70px rgba(0,0,0,.38);
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       background:
-        radial-gradient(circle at 50% 20%, rgba(22,139,255,.20), transparent 38%),
-        var(--bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+        radial-gradient(circle at 15% 10%, rgba(141,99,255,.16), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(216,180,107,.11), transparent 26%),
+        linear-gradient(180deg,var(--bg),#050507 70%);
+      color:var(--text);
+      line-height:1.55;
+      overflow-x:hidden;
     }
-    main {
-      width: min(100%, 620px);
-      padding: clamp(28px, 6vw, 52px);
-      text-align: center;
-      background: rgba(12, 19, 38, .92);
-      border: 1px solid rgba(69, 153, 255, .28);
-      border-radius: 24px;
-      box-shadow: 0 24px 80px rgba(0,0,0,.35);
+
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button,input,select,textarea{font:inherit}
+    .container{width:min(1160px,92%);margin:auto}
+
+    .topbar{
+      position:fixed;
+      inset:0 0 auto 0;
+      z-index:50;
+      background:rgba(8,8,12,.68);
+      border-bottom:1px solid rgba(255,255,255,.07);
+      backdrop-filter:blur(14px);
     }
-    .logo {
-      margin: 0 0 28px;
-      font-size: clamp(2.4rem, 8vw, 4rem);
-      font-weight: 900;
-      letter-spacing: -0.08em;
+
+    .nav{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
     }
-    .logo span { color: var(--blue); }
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 13px;
-      border: 1px solid rgba(255, 190, 80, .4);
-      border-radius: 999px;
-      color: #ffd28a;
-      font-size: .85rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:850;
+      letter-spacing:.08em;
     }
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ffbd59;
-      box-shadow: 0 0 12px rgba(255,189,89,.7);
+
+    .brand img{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      object-fit:cover;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 0 26px rgba(141,99,255,.18);
     }
-    h1 {
-      margin: 24px 0 14px;
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
-      line-height: 1.12;
+
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap:22px;
+      font-size:14px;
+      color:#e7e7eb;
     }
-    p {
-      margin: 0 auto;
-      max-width: 440px;
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.7;
+
+    .navlinks a{transition:.2s}
+    .navlinks a:hover{color:var(--gold2)}
+
+    .nav-cta{
+      padding:10px 16px;
+      border-radius:999px;
+      background:#fff;
+      color:#08080c!important;
+      font-weight:800;
     }
-    .rule {
-      width: 64px;
-      height: 3px;
-      margin: 28px auto;
-      border-radius: 3px;
-      background: var(--blue);
+
+    .menu-btn{
+      display:none;
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:#fff;
+      cursor:pointer;
+      font-size:22px;
     }
-    footer {
-      color: #74839c;
-      font-size: .85rem;
+
+    .hero{
+      min-height:100svh;
+      display:grid;
+      align-items:center;
+      padding:118px 0 70px;
+      position:relative;
+      isolation:isolate;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg,rgba(5,5,8,.94) 0%,rgba(5,5,8,.80) 42%,rgba(5,5,8,.46) 72%,rgba(5,5,8,.76) 100%),
+        url("gallery3.webp") center/cover no-repeat;
+      z-index:-2;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0 0;
+      height:260px;
+      background:linear-gradient(transparent,var(--bg));
+      z-index:-1;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(300px,.65fr);
+      gap:54px;
+      align-items:center;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 13px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(0,0,0,.28);
+      color:#dedee5;
+      font-size:12px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--gold);
+      box-shadow:0 0 18px var(--gold);
+    }
+
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(52px,8vw,98px);
+      line-height:.92;
+      letter-spacing:-.045em;
+      max-width:820px;
+    }
+
+    .gradient-text{
+      background:linear-gradient(90deg,#fff 0%,var(--gold2) 52%,#fff 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .hero-copy{
+      max-width:680px;
+      margin:0 0 28px;
+      color:#e2e2e7;
+      font-size:clamp(17px,2vw,20px);
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:30px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:50px;
+      padding:0 22px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-weight:800;
+      transition:.2s ease;
+      cursor:pointer;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#161108;
+      border-color:transparent;
+      box-shadow:0 12px 36px rgba(216,180,107,.22);
+    }
+    .btn.secondary{
+      background:rgba(0,0,0,.30);
+      color:#fff;
+    }
+
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .chip{
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:#d3d3da;
+      background:rgba(0,0,0,.25);
+      font-size:13px;
+    }
+
+    .hero-card{
+      position:relative;
+      max-width:380px;
+      justify-self:end;
+      padding:14px;
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,.13);
+      background:rgba(10,10,15,.55);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+    }
+
+    .hero-card img{
+      width:100%;
+      aspect-ratio:4/5;
+      object-fit:cover;
+      object-position:center 20%;
+      border-radius:22px;
+    }
+
+    .hero-card-label{
+      position:absolute;
+      inset:auto 26px 26px 26px;
+      padding:15px 16px;
+      border-radius:18px;
+      background:rgba(8,8,12,.72);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(12px);
+    }
+
+    .hero-card-label strong{
+      display:block;
+      font-size:20px;
+    }
+
+    .hero-card-label span{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    section{padding:94px 0}
+    .section-head{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:30px;
+      align-items:end;
+      margin-bottom:34px;
+    }
+
+    .section-head h2{
+      margin:0 0 8px;
+      font-size:clamp(34px,5vw,52px);
+      letter-spacing:-.035em;
+    }
+
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      max-width:720px;
+    }
+
+    .eyebrow{
+      color:var(--gold2);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:850;
+      margin-bottom:8px;
+    }
+
+    .services{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .card{
+      position:relative;
+      padding:26px;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      box-shadow:0 18px 50px rgba(0,0,0,.20);
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      width:110px;
+      height:110px;
+      right:-38px;
+      top:-38px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(141,99,255,.18),transparent 68%);
+      pointer-events:none;
+    }
+
+    .card-num{
+      display:inline-flex;
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:28px;
+      background:rgba(216,180,107,.12);
+      color:var(--gold2);
+      border:1px solid rgba(216,180,107,.20);
+      font-weight:900;
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:21px;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:1.25fr .9fr .9fr;
+      grid-template-rows:260px 260px;
+      gap:14px;
+    }
+
+    .photo{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:#111;
+      cursor:pointer;
+      min-height:0;
+    }
+
+    .photo:first-child{grid-row:1/3}
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .45s ease,filter .3s ease;
+    }
+    .photo:hover img{
+      transform:scale(1.035);
+      filter:brightness(1.05);
+    }
+    .photo span{
+      position:absolute;
+      left:14px;
+      bottom:14px;
+      padding:8px 11px;
+      border-radius:999px;
+      background:rgba(0,0,0,.62);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:12px;
+      backdrop-filter:blur(8px);
+    }
+
+    .about{
+      display:grid;
+      grid-template-columns:.82fr 1.18fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .profile-panel,
+    .about-panel{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .profile-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .profile-panel img{
+      width:100%;
+      height:440px;
+      object-fit:cover;
+      object-position:center 22%;
+      border-radius:21px;
+    }
+
+    .profile-meta{
+      padding:2px 8px 10px;
+    }
+
+    .profile-meta strong{
+      display:block;
+      font-size:26px;
+      margin-bottom:4px;
+    }
+
+    .profile-meta a{
+      color:var(--gold2);
+      font-size:14px;
+    }
+
+    .about-panel{
+      padding:36px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .about-panel h2{
+      margin:0 0 16px;
+      font-size:clamp(36px,5vw,54px);
+      line-height:1;
+      letter-spacing:-.04em;
+    }
+
+    .about-panel p{
+      color:var(--muted);
+      margin:0 0 14px;
+      max-width:760px;
+    }
+
+    .about-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .booking{
+      display:grid;
+      grid-template-columns:.82fr 1.18fr;
+      gap:18px;
+    }
+
+    .booking-intro,
+    .booking-form{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      box-shadow:var(--shadow);
+    }
+
+    .booking-intro{
+      padding:36px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:100%;
+    }
+
+    .booking-intro h2{
+      margin:0 0 14px;
+      font-size:clamp(36px,5vw,54px);
+      line-height:1;
+      letter-spacing:-.04em;
+    }
+
+    .booking-intro p{
+      color:var(--muted);
+      margin:0 0 24px;
+    }
+
+    .contact-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .contact-link{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.025);
+    }
+
+    .contact-link span:last-child{
+      color:var(--gold2);
+    }
+
+    .booking-form{
+      padding:28px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .field{
+      display:grid;
+      gap:7px;
+    }
+
+    .field.full{grid-column:1/-1}
+
+    .field label{
+      color:#dcdce2;
+      font-size:13px;
+      font-weight:750;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:1px solid var(--line);
+      background:#0b0b11;
+      color:#fff;
+      border-radius:15px;
+      padding:13px 14px;
+      outline:none;
+      transition:.2s;
+    }
+
+    .field input:not([type="hidden"]),
+    .field select,
+    .picker-trigger{
+      min-height:49px;
+    }
+
+    .field textarea{
+      min-height:120px;
+      resize:vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:rgba(216,180,107,.55);
+      box-shadow:0 0 0 3px rgba(216,180,107,.08);
+    }
+
+    .form-note{
+      color:#9999a5;
+      font-size:12px;
+      margin-top:10px;
+    }
+
+    .picker-trigger{
+      width:100%;
+      min-height:49px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:13px 14px;
+      border:1px solid var(--line);
+      background:#0b0b11;
+      color:#fff;
+      border-radius:15px;
+      text-align:left;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .picker-trigger:hover,
+    .picker-trigger:focus-visible{
+      border-color:rgba(216,180,107,.55);
+      box-shadow:0 0 0 3px rgba(216,180,107,.08);
+      outline:none;
+    }
+
+    .picker-placeholder{
+      color:#8f8f9a;
+    }
+
+    .picker-icon{
+      width:31px;
+      height:31px;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      border-radius:10px;
+      color:var(--gold2);
+      background:rgba(216,180,107,.10);
+      border:1px solid rgba(216,180,107,.18);
+      font-size:15px;
+    }
+
+    .picker-dialog{
+      width:min(390px,calc(100vw - 28px));
+      padding:0;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:24px;
+      background:#0d0d14;
+      color:#fff;
+      box-shadow:0 30px 90px rgba(0,0,0,.62);
+      overflow:hidden;
+    }
+
+    .picker-dialog::backdrop{
+      background:rgba(0,0,0,.72);
+      backdrop-filter:blur(6px);
+    }
+
+    .picker-shell{
+      padding:18px;
+    }
+
+    .picker-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .picker-top strong{
+      font-size:17px;
+    }
+
+    .picker-close{
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      color:#fff;
+      cursor:pointer;
+      font-size:20px;
+    }
+
+    .calendar-head{
+      display:grid;
+      grid-template-columns:42px 1fr 42px;
+      align-items:center;
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .calendar-title{
+      text-align:center;
+      text-transform:capitalize;
+      font-weight:850;
+      color:#f0f0f4;
+    }
+
+    .calendar-nav{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:13px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      color:#fff;
+      cursor:pointer;
+      font-size:20px;
+    }
+
+    .calendar-nav:hover:not(:disabled){
+      color:var(--gold2);
+      border-color:rgba(216,180,107,.32);
+    }
+
+    .calendar-nav:disabled{
+      opacity:.28;
+      cursor:not-allowed;
+    }
+
+    .calendar-weekdays,
+    .calendar-days{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:6px;
+    }
+
+    .calendar-weekdays{
+      margin-bottom:6px;
+    }
+
+    .calendar-weekdays span{
+      text-align:center;
+      color:#777784;
+      font-size:11px;
+      font-weight:850;
+      text-transform:uppercase;
+    }
+
+    .calendar-empty{
+      aspect-ratio:1;
+    }
+
+    .calendar-day{
+      aspect-ratio:1;
+      display:grid;
+      place-items:center;
+      border:0;
+      border-radius:12px;
+      background:transparent;
+      color:#ececf1;
+      cursor:pointer;
+      font-size:13px;
+      transition:.15s;
+    }
+
+    .calendar-day:hover:not(:disabled){
+      color:var(--gold2);
+      background:rgba(216,180,107,.10);
+    }
+
+    .calendar-day.today{
+      box-shadow:inset 0 0 0 1px rgba(216,180,107,.45);
+    }
+
+    .calendar-day.selected{
+      color:#171107;
+      font-weight:900;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+    }
+
+    .calendar-day:disabled{
+      color:#3f3f49;
+      cursor:not-allowed;
+    }
+
+    .calendar-day.booked{
+      color:#8a5a5a;
+      background:rgba(190,70,70,.10);
+      text-decoration:line-through;
+      opacity:.72;
+    }
+
+    .time-display{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      margin:4px 0 18px;
+    }
+
+    .time-box{
+      min-width:78px;
+      padding:13px 12px;
+      border-radius:17px;
+      border:1px solid rgba(216,180,107,.18);
+      background:rgba(216,180,107,.08);
+      color:var(--gold2);
+      text-align:center;
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:.02em;
+    }
+
+    .time-colon{
+      color:#bdbdc6;
+      font-size:25px;
+      font-weight:900;
+    }
+
+    .time-section-label{
+      margin:13px 0 8px;
+      color:#8f8f9a;
+      font-size:11px;
+      font-weight:850;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .time-grid{
+      display:grid;
+      grid-template-columns:repeat(6,1fr);
+      gap:7px;
+    }
+
+    .minute-grid{
+      grid-template-columns:repeat(4,1fr);
+    }
+
+    .time-choice{
+      min-height:40px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      color:#eaeaf0;
+      cursor:pointer;
+      transition:.15s;
+    }
+
+    .time-choice:hover{
+      color:var(--gold2);
+      border-color:rgba(216,180,107,.32);
+    }
+
+    .time-choice.selected{
+      color:#171107;
+      border-color:transparent;
+      font-weight:900;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+    }
+
+    .picker-actions{
+      display:flex;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .picker-actions button{
+      flex:1;
+      min-height:44px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:850;
+    }
+
+    .picker-cancel{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      color:#fff;
+    }
+
+    .picker-confirm{
+      border:0;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#171107;
+    }
+
+    .picker-error{
+      min-height:0;
+      margin-top:6px;
+      color:#f29b9b;
+      font-size:12px;
+    }
+
+    .picker-error:empty{
+      display:none;
+    }
+
+    @media(max-width:520px){
+      .time-grid{
+        grid-template-columns:repeat(4,1fr);
+      }
+    }
+
+    .service-choice-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+
+    .service-choice{
+      position:relative;
+      cursor:pointer;
+    }
+
+    .service-choice input{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .service-choice-body{
+      min-height:88px;
+      display:grid;
+      grid-template-columns:44px 1fr 28px;
+      align-items:center;
+      gap:13px;
+      padding:15px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.018));
+      color:#fff;
+      transition:.2s ease;
+    }
+
+    .service-choice:hover .service-choice-body{
+      transform:translateY(-1px);
+      border-color:rgba(216,180,107,.30);
+      background:
+        linear-gradient(180deg,rgba(216,180,107,.055),rgba(255,255,255,.02));
+    }
+
+    .service-choice input:focus-visible + .service-choice-body{
+      outline:2px solid rgba(216,180,107,.65);
+      outline-offset:2px;
+    }
+
+    .service-choice input:checked + .service-choice-body{
+      border-color:rgba(216,180,107,.55);
+      background:
+        radial-gradient(circle at 12% 50%,rgba(216,180,107,.13),transparent 42%),
+        linear-gradient(180deg,rgba(216,180,107,.075),rgba(255,255,255,.025));
+      box-shadow:
+        inset 0 0 0 1px rgba(216,180,107,.09),
+        0 12px 28px rgba(0,0,0,.16);
+    }
+
+    .service-choice-icon{
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.075);
+      font-size:22px;
+      transition:.2s ease;
+    }
+
+    .service-choice input:checked + .service-choice-body .service-choice-icon{
+      color:#171107;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      border-color:transparent;
+    }
+
+    .service-choice-text{
+      min-width:0;
+    }
+
+    .service-choice-text strong{
+      display:block;
+      margin-bottom:2px;
+      font-size:15px;
+    }
+
+    .service-choice-text small{
+      display:block;
+      color:#92929e;
+      font-size:12px;
+      line-height:1.35;
+    }
+
+    .service-choice-check{
+      width:26px;
+      height:26px;
+      display:grid;
+      place-items:center;
+      justify-self:end;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.13);
+      color:transparent;
+      background:rgba(255,255,255,.025);
+      font-size:14px;
+      font-weight:900;
+      transition:.2s ease;
+    }
+
+    .service-choice input:checked + .service-choice-body .service-choice-check{
+      color:#171107;
+      border-color:transparent;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+    }
+
+    .consent{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:13px 14px;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:rgba(255,255,255,.025);
+      color:#c7c7cf;
+      font-size:13px;
+    }
+
+    .consent input{
+      width:18px;
+      height:18px;
+      margin-top:1px;
+      flex:0 0 auto;
+      accent-color:var(--gold);
+    }
+
+    .honeypot{
+      position:absolute !important;
+      left:-9999px !important;
+      width:1px !important;
+      height:1px !important;
+      overflow:hidden !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+    }
+
+    .submit-row{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .reviews-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .review-card{
+      position:relative;
+      min-height:230px;
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 100% 0%,rgba(216,180,107,.09),transparent 35%),
+        linear-gradient(180deg,var(--panel),var(--panel2));
+      box-shadow:0 18px 50px rgba(0,0,0,.20);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .review-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .review-stars{
+      color:var(--gold2);
+      letter-spacing:2px;
+      font-size:15px;
+    }
+
+    .review-badge{
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid rgba(216,180,107,.22);
+      background:rgba(216,180,107,.08);
+      color:var(--gold2);
+      font-size:10px;
+      font-weight:850;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .review-text{
+      margin:0;
+      color:#e7e7ec;
+      font-size:15px;
+      line-height:1.65;
+      flex:1;
+    }
+
+    .review-author{
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.07);
+    }
+
+    .review-author strong{
+      display:block;
+      margin-bottom:2px;
+      font-size:15px;
+    }
+
+    .review-author span{
+      color:#8f8f9a;
+      font-size:12px;
+    }
+
+    .reviews-note{
+      margin-top:16px;
+      color:#858591;
+      font-size:12px;
+      text-align:center;
+    }
+
+    .faq{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    details{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border-radius:18px;
+      padding:17px 18px;
+    }
+
+    summary{
+      cursor:pointer;
+      font-weight:800;
+    }
+
+    details p{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+
+    .review-actions{
+      margin-top:24px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .review-form{
+      margin-top:24px;
+      padding:22px;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:18px;
+      background:rgba(255,255,255,.025);
+      box-shadow:0 16px 45px rgba(0,0,0,.14);
+    }
+    .review-form-grid{
+      display:grid;
+      grid-template-columns:1fr 180px;
+      gap:14px;
+    }
+    .review-form .field.full{grid-column:1/-1}
+    .review-form textarea{min-height:120px;resize:vertical}
+    .review-help{margin:10px 0 0;color:var(--muted);font-size:.9rem}
+    @media(max-width:700px){
+      .review-form-grid{grid-template-columns:1fr}
+      .review-form .field.full{grid-column:auto}
+    }
+
+    footer{
+      padding:30px 0 42px;
+      border-top:1px solid rgba(255,255,255,.07);
+      color:#8f8f9a;
+      font-size:13px;
+    }
+
+    .footer-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .admin-link{
+      opacity:.45;
+      font-size:.85rem;
+      text-decoration:none;
+      color:inherit;
+      transition:opacity .2s ease,color .2s ease;
+    }
+    .admin-link:hover{
+      opacity:1;
+      color:var(--gold2);
+    }
+
+    .lightbox{
+      position:fixed;
+      inset:0;
+      z-index:100;
+      display:none;
+      place-items:center;
+      padding:24px;
+      background:rgba(0,0,0,.88);
+      backdrop-filter:blur(10px);
+    }
+
+    .lightbox.open{display:grid}
+    .lightbox img{
+      max-width:min(1100px,94vw);
+      max-height:88vh;
+      border-radius:22px;
+      box-shadow:0 30px 100px rgba(0,0,0,.6);
+    }
+
+    .lightbox button{
+      position:absolute;
+      top:22px;
+      right:22px;
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      font-size:25px;
+      cursor:pointer;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .6s ease,transform .6s ease;
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    @media(max-width:980px){
+      .hero-grid,
+      .about,
+      .booking{
+        grid-template-columns:1fr;
+      }
+
+      .hero-card{
+        justify-self:start;
+        max-width:330px;
+      }
+
+      .services{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .reviews-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .gallery{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:340px 220px 220px;
+      }
+
+      .photo:first-child{
+        grid-column:1/-1;
+        grid-row:auto;
+      }
+
+      .profile-panel img{height:520px}
+    }
+
+    @media(max-width:720px){
+      .menu-btn{display:inline-grid;place-items:center}
+      .navlinks{
+        display:none;
+        position:absolute;
+        top:74px;
+        left:4%;
+        right:4%;
+        padding:16px;
+        border:1px solid var(--line);
+        border-radius:18px;
+        background:rgba(8,8,12,.96);
+        flex-direction:column;
+        align-items:stretch;
+        gap:6px;
+        box-shadow:var(--shadow);
+      }
+      .navlinks.open{display:flex}
+      .navlinks a{padding:10px 12px}
+      .nav-cta{text-align:center}
+      .hero{padding-top:104px}
+      .hero-card{display:none}
+      .section-head{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr}
+      .reviews-grid{grid-template-columns:1fr}
+      .gallery{
+        grid-template-columns:1fr;
+        grid-template-rows:repeat(4,250px);
+      }
+      .photo:first-child{grid-column:auto}
+      .form-grid{grid-template-columns:1fr}
+      .field.full{grid-column:auto}
+      .service-choice-grid{grid-template-columns:1fr}
+      .faq{grid-template-columns:1fr}
+      section{padding:76px 0}
+      .profile-panel img{height:420px}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1;transform:none;transition:none}
+      .photo img,.btn{transition:none}
+    }
+  
+    /* V17 PREMIUM : uniquement visuel, contenu et catégories inchangés */
+    :root{--mx:50vw;--my:25vh;--scroll-progress:0%;}
+
+    body::before{
+      content:"";position:fixed;inset:0;z-index:-20;pointer-events:none;
+      background:
+        radial-gradient(520px circle at var(--mx) var(--my),rgba(141,99,255,.12),transparent 62%),
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:auto,52px 52px,52px 52px;
+      mask-image:linear-gradient(to bottom,#000,transparent 90%);opacity:.7;
+    }
+    body::after{
+      content:"";position:fixed;inset:-20%;z-index:-19;pointer-events:none;
+      background:radial-gradient(circle at 18% 20%,rgba(141,99,255,.11),transparent 18%),
+                 radial-gradient(circle at 82% 28%,rgba(216,180,107,.09),transparent 19%),
+                 radial-gradient(circle at 58% 84%,rgba(61,194,255,.06),transparent 21%);
+      filter:blur(30px);animation:ambientShift 16s ease-in-out infinite alternate;
+    }
+    @keyframes ambientShift{from{transform:translate3d(-1.5%,-1%,0)}to{transform:translate3d(1.5%,1%,0) scale(1.045)}}
+
+    .topbar{box-shadow:0 10px 40px rgba(0,0,0,.18)}
+    .topbar::after{content:"";position:absolute;left:0;bottom:-1px;width:var(--scroll-progress);height:2px;background:linear-gradient(90deg,var(--violet),var(--gold2),var(--gold));box-shadow:0 0 14px rgba(216,180,107,.45)}
+    .brand img{transition:.35s ease}.brand:hover img{transform:rotate(-5deg) scale(1.06);box-shadow:0 0 32px rgba(141,99,255,.34)}
+    .navlinks a:not(.nav-cta){position:relative;padding:8px 0}
+    .navlinks a:not(.nav-cta)::after{content:"";position:absolute;left:50%;right:50%;bottom:1px;height:1px;background:linear-gradient(90deg,var(--violet),var(--gold2));transition:.24s ease}
+    .navlinks a:not(.nav-cta):hover::after,.navlinks a.active:not(.nav-cta)::after{left:0;right:0}
+    .navlinks a.active:not(.nav-cta){color:var(--gold2)}
+
+    .hero::before{background:linear-gradient(90deg,rgba(5,5,8,.96),rgba(5,5,8,.82) 40%,rgba(5,5,8,.40) 72%,rgba(5,5,8,.76)),url("gallery3.webp") center/cover no-repeat;animation:heroBreath 13s ease-in-out infinite alternate}
+    @keyframes heroBreath{from{transform:scale(1.015)}to{transform:scale(1.055)}}
+    .gradient-text{background-size:220% auto;animation:titleShimmer 7s linear infinite}
+    @keyframes titleShimmer{to{background-position:220% center}}
+    .dot{animation:liveDot 1.9s ease-in-out infinite}
+    @keyframes liveDot{0%,100%{transform:scale(.9);box-shadow:0 0 10px var(--gold)}50%{transform:scale(1.18);box-shadow:0 0 28px var(--gold)}}
+
+    .btn{position:relative;overflow:hidden;isolation:isolate;box-shadow:0 10px 24px rgba(0,0,0,.16)}
+    .btn:hover{transform:translateY(-3px) scale(1.012);box-shadow:0 16px 36px rgba(0,0,0,.25)}
+    .btn.secondary:hover{border-color:rgba(216,180,107,.32);background:rgba(216,180,107,.08)}
+    .btn.primary::before,.nav-cta::before{content:"";position:absolute;inset:-60% auto -60% -35%;width:28%;transform:rotate(18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.72),transparent);animation:buttonShine 4.5s ease-in-out infinite}
+    @keyframes buttonShine{0%,68%{left:-38%;opacity:0}75%{opacity:.85}92%,100%{left:116%;opacity:0}}
+    .chip{transition:.2s ease;backdrop-filter:blur(8px)}.chip:hover{transform:translateY(-2px);border-color:rgba(216,180,107,.30);background:rgba(216,180,107,.06)}
+
+    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.018)),rgba(10,10,15,.56);box-shadow:0 30px 80px rgba(0,0,0,.44),0 0 52px rgba(141,99,255,.08);transition:.45s ease;animation:cardFloat 6s ease-in-out infinite}
+    .hero-card:hover{transform:translateY(-7px) rotate(.45deg);box-shadow:0 36px 90px rgba(0,0,0,.5),0 0 70px rgba(141,99,255,.14)}
+    @keyframes cardFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+
+    section{position:relative}
+    section:not(.hero)::before{content:"";position:absolute;left:50%;top:0;width:min(1040px,82vw);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.065),rgba(216,180,107,.14),rgba(255,255,255,.065),transparent)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px}.eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--violet),var(--gold2));box-shadow:0 0 12px rgba(216,180,107,.25)}
+
+    .card,.review-card,.profile-panel,.about-panel,.booking-form,.booking-intro{position:relative;overflow:hidden;border-color:rgba(255,255,255,.105);box-shadow:0 16px 50px rgba(0,0,0,.18)}
+    .card::before,.review-card::before,.profile-panel::before,.about-panel::before,.booking-form::before,.booking-intro::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.055),transparent 24%,transparent 72%,rgba(216,180,107,.035));opacity:.65}
+    .card{transition:.32s ease}.card:hover{transform:translateY(-7px);border-color:rgba(216,180,107,.28);box-shadow:0 28px 65px rgba(0,0,0,.28),0 0 32px rgba(141,99,255,.055)}
+    .card .icon{transition:.32s ease}.card:hover .icon{transform:translateY(-3px) rotate(-3deg) scale(1.05)}
+
+    .photo{border-color:rgba(255,255,255,.11);box-shadow:0 18px 46px rgba(0,0,0,.22);transition:.35s ease}
+    .photo::after{content:"Voir";position:absolute;right:15px;bottom:15px;padding:7px 11px;border:1px solid rgba(255,255,255,.15);border-radius:999px;background:rgba(8,8,12,.70);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.28s ease;backdrop-filter:blur(10px)}
+    .photo:hover{transform:translateY(-5px);border-color:rgba(216,180,107,.30);box-shadow:0 26px 62px rgba(0,0,0,.32)}
+    .photo:hover::after{opacity:1;transform:none}.photo img{transition:.6s cubic-bezier(.2,.8,.2,1)}.photo:hover img{transform:scale(1.065);filter:saturate(1.08) contrast(1.03)}
+
+    .profile-panel,.about-panel,.review-card{transition:.35s ease}.profile-panel:hover,.about-panel:hover,.review-card:hover{transform:translateY(-5px);border-color:rgba(216,180,107,.25)}
+    .review-card::after{content:"“";position:absolute;right:18px;top:10px;color:rgba(216,180,107,.11);font-family:Georgia,serif;font-size:92px;line-height:1;pointer-events:none}
+    .review-stars{text-shadow:0 0 16px rgba(216,180,107,.27)}
+
+    .contact-link{transition:.25s ease}.contact-link:hover{transform:translateX(4px);border-color:rgba(216,180,107,.28);background:rgba(216,180,107,.055)}
+    .booking-form{box-shadow:0 30px 80px rgba(0,0,0,.30)}
+    .field input,.field select,.field textarea,.picker-trigger{transition:.22s ease}
+    .field input:focus,.field select:focus,.field textarea:focus,.picker-trigger:focus-visible{border-color:rgba(216,180,107,.50);background:#0d0d14;box-shadow:0 0 0 4px rgba(216,180,107,.075),0 12px 26px rgba(0,0,0,.14)}
+    .service-choice:hover .service-choice-body{transform:translateY(-3px);box-shadow:0 15px 34px rgba(0,0,0,.20)}
+    .faq details{transition:.25s ease}.faq details:hover{transform:translateY(-2px);border-color:rgba(216,180,107,.22);background:rgba(216,180,107,.035)}.faq details[open] summary{color:var(--gold2)}
+    dialog{box-shadow:0 34px 90px rgba(0,0,0,.65),0 0 60px rgba(141,99,255,.09)}
+    .lightbox{backdrop-filter:blur(18px)}
+    footer{position:relative;overflow:hidden}footer::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 0,rgba(141,99,255,.08),transparent 48%)}
+    .reveal{transform:translateY(24px) scale(.992)}.reveal.visible{transform:none}
+
+    @media(max-width:760px){body::before{background-size:auto,38px 38px,38px 38px;opacity:.45}.hero-card{animation:none}.photo::after{opacity:1;transform:none}}
+    @media(prefers-reduced-motion:reduce){body::after,.hero::before,.gradient-text,.dot,.hero-card,.nav-cta::before,.btn.primary::before{animation:none!important}}
+
+  
+    /* ===== V18 WhatsApp ===== */
+    .whatsapp-btn{
+      color:#fff;
+      border:1px solid rgba(77,230,135,.40);
+      background:
+        linear-gradient(135deg,rgba(37,211,102,.18),rgba(18,140,126,.10)),
+        rgba(255,255,255,.025);
+      box-shadow:0 10px 28px rgba(37,211,102,.10);
+    }
+
+    .whatsapp-btn:hover{
+      border-color:rgba(77,230,135,.68);
+      background:
+        linear-gradient(135deg,rgba(37,211,102,.26),rgba(18,140,126,.16)),
+        rgba(255,255,255,.04);
+      box-shadow:0 16px 38px rgba(37,211,102,.16);
+    }
+
+    .whatsapp-contact{
+      border-color:rgba(77,230,135,.16);
+    }
+
+    .whatsapp-contact:hover{
+      border-color:rgba(77,230,135,.40);
+      background:rgba(37,211,102,.055);
+    }
+
+    .whatsapp-float{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:80;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:11px 15px 11px 11px;
+      border:1px solid rgba(77,230,135,.42);
+      border-radius:999px;
+      background:rgba(9,15,13,.84);
+      color:#fff;
+      font-weight:850;
+      font-size:13px;
+      text-decoration:none;
+      box-shadow:
+        0 16px 45px rgba(0,0,0,.34),
+        0 0 26px rgba(37,211,102,.10);
+      backdrop-filter:blur(14px);
+      transition:transform .25s ease,border-color .25s ease,background .25s ease;
+    }
+
+    .whatsapp-float:hover{
+      transform:translateY(-4px) scale(1.02);
+      border-color:rgba(77,230,135,.70);
+      background:rgba(16,36,27,.92);
+    }
+
+    .whatsapp-float-icon{
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:linear-gradient(135deg,#25d366,#18a957);
+      color:#fff;
+      font-size:19px;
+      box-shadow:0 0 22px rgba(37,211,102,.22);
+    }
+
+    .whatsapp-float-icon::before{
+      content:"✆";
+      transform:rotate(-18deg);
+      display:block;
+    }
+
+    @media (max-width:760px){
+      .whatsapp-float{
+        right:14px;
+        bottom:14px;
+        padding:9px;
+      }
+      .whatsapp-float span:last-child{
+        display:none;
+      }
+      .whatsapp-float-icon{
+        width:38px;
+        height:38px;
+      }
+    }
+
+  
+    /* ===== V20 PERFORMANCE ===== */
+    body::before{
+      background:
+        radial-gradient(circle at 20% 12%,rgba(141,99,255,.07),transparent 28%),
+        radial-gradient(circle at 82% 30%,rgba(216,180,107,.05),transparent 24%);
+      background-size:auto;
+      mask-image:none;
+      opacity:.65;
+    }
+
+    body::after{
+      display:none!important;
+      animation:none!important;
+      filter:none!important;
+    }
+
+    .topbar::after{
+      display:none!important;
+    }
+
+    .hero::before{
+      animation:none!important;
+      transform:none!important;
+    }
+
+    .gradient-text,
+    .dot,
+    .hero-card,
+    .nav-cta::before,
+    .btn.primary::before{
+      animation:none!important;
+    }
+
+    .hero-card{
+      translate:none!important;
+      transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+    }
+
+    .hero-card:hover,
+    .card:hover,
+    .review-card:hover,
+    .profile-panel:hover,
+    .about-panel:hover,
+    .photo:hover{
+      transform:translateY(-3px)!important;
+    }
+
+    .card,
+    .review-card,
+    .hero-card,
+    .profile-panel,
+    .about-panel,
+    .booking-form,
+    .booking-intro,
+    .photo{
+      box-shadow:0 14px 34px rgba(0,0,0,.20)!important;
+    }
+
+    .photo:hover img{
+      transform:scale(1.025)!important;
+    }
+
+    .topbar,
+    .kicker,
+    .chip,
+    .whatsapp-float,
+    .contact-link{
+      backdrop-filter:none!important;
+      -webkit-backdrop-filter:none!important;
+    }
+
+    .whatsapp-float{
+      background:rgba(9,15,13,.96);
+    }
+
+    section{
+      content-visibility:auto;
+      contain-intrinsic-size:700px;
+    }
+
+    .hero{
+      content-visibility:visible;
+      contain-intrinsic-size:auto;
+    }
+
+    .reveal{
+      transform:translateY(10px);
+      transition:opacity .30s ease,transform .30s ease;
+    }
+
+    @media (max-width:760px){
+      .reveal{
+        transform:none!important;
+        opacity:1!important;
+      }
+
+      .card:hover,
+      .review-card:hover,
+      .profile-panel:hover,
+      .about-panel:hover,
+      .photo:hover,
+      .hero-card:hover,
+      .btn:hover,
+      .contact-link:hover,
+      .service-choice:hover .service-choice-body{
+        transform:none!important;
+      }
+    }
+
+  
+    /* ===== V21 - Recherche du lieu sur Google Maps ===== */
+    .location-search{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:10px;
+      align-items:stretch;
+    }
+
+    .location-search input{
+      min-width:0;
+    }
+
+    .maps-search-btn{
+      min-height:49px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:0 16px;
+      border:1px solid rgba(216,180,107,.24);
+      border-radius:15px;
+      background:
+        linear-gradient(135deg,rgba(216,180,107,.095),rgba(141,99,255,.045)),
+        #0b0b11;
+      color:#f4f1e9;
+      font:inherit;
+      font-size:13px;
+      font-weight:820;
+      white-space:nowrap;
+      cursor:pointer;
+      transition:border-color .2s ease,background .2s ease,transform .2s ease,opacity .2s ease;
+    }
+
+    .maps-search-btn:hover:not(:disabled){
+      transform:translateY(-1px);
+      border-color:rgba(216,180,107,.46);
+      background:
+        linear-gradient(135deg,rgba(216,180,107,.15),rgba(141,99,255,.075)),
+        #0d0d14;
+    }
+
+    .maps-search-btn:disabled{
+      opacity:.42;
+      cursor:not-allowed;
+    }
+
+    .maps-search-icon{
+      font-size:18px;
+      color:var(--gold2);
+    }
+
+    .location-search-hint{
+      margin-top:7px;
+      color:#82828e;
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    @media (max-width:650px){
+      .location-search{
+        grid-template-columns:1fr;
+      }
+
+      .maps-search-btn{
+        width:100%;
+      }
+    }
+
+  
+    /* ===== V23 - Autocomplétion d'adresse ===== */
+    .location-autocomplete-wrap{position:relative}
+    .address-suggestions{
+      position:absolute;left:0;right:0;top:calc(100% + 7px);z-index:65;
+      overflow:hidden;border:1px solid rgba(216,180,107,.24);border-radius:16px;
+      background:#0c0c13;box-shadow:0 22px 55px rgba(0,0,0,.46)
+    }
+    .address-suggestions[hidden]{display:none}
+    .address-suggestion{
+      width:100%;display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;
+      align-items:center;padding:11px 13px;border:0;border-bottom:1px solid rgba(255,255,255,.065);
+      background:transparent;color:#f2f2f6;text-align:left;cursor:pointer;font:inherit
+    }
+    .address-suggestion:last-child{border-bottom:0}
+    .address-suggestion:hover,.address-suggestion.active{
+      background:linear-gradient(90deg,rgba(216,180,107,.10),rgba(141,99,255,.055))
+    }
+    .address-pin{
+      width:34px;height:34px;display:grid;place-items:center;border-radius:11px;
+      border:1px solid rgba(216,180,107,.18);background:rgba(216,180,107,.065);
+      color:var(--gold2);font-size:17px
+    }
+    .address-suggestion-main{min-width:0}
+    .address-suggestion-title,.address-suggestion-sub{
+      display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+    }
+    .address-suggestion-title{color:#fff;font-size:13px;font-weight:820;line-height:1.35}
+    .address-suggestion-sub{margin-top:2px;color:#8d8d99;font-size:11px;line-height:1.35}
+    .address-suggestions-status{padding:12px 14px;color:#8d8d99;font-size:12px}
+
+  
+    /* ===== V24 - Working in the Arts ===== */
+    .wia-notice{
+      display:grid;
+      grid-template-columns:42px minmax(0,1fr) auto;
+      gap:14px;
+      align-items:center;
+      margin-bottom:24px;
+      padding:16px 18px;
+      border:1px solid rgba(216,180,107,.22);
+      border-radius:18px;
+      background:
+        linear-gradient(135deg,rgba(216,180,107,.075),rgba(141,99,255,.035)),
+        #0b0b11;
+      box-shadow:0 14px 34px rgba(0,0,0,.16);
+    }
+
+    .wia-notice-icon{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:13px;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#171107;
+      font-size:20px;
+      font-weight:900;
+    }
+
+    .wia-notice strong{
+      display:block;
+      margin-bottom:3px;
+      color:#fff;
+      font-size:14px;
+    }
+
+    .wia-notice p{
+      margin:0;
+      color:#aaaab4;
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .wia-notice a{
+      padding:10px 13px;
+      border:1px solid rgba(216,180,107,.28);
+      border-radius:12px;
+      color:var(--gold2);
+      font-size:12px;
+      font-weight:820;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .wia-notice a:hover{
+      background:rgba(216,180,107,.07);
+      border-color:rgba(216,180,107,.44);
+    }
+
+    @media (max-width:700px){
+      .wia-notice{
+        grid-template-columns:42px minmax(0,1fr);
+      }
+
+      .wia-notice a{
+        grid-column:1 / -1;
+        text-align:center;
+      }
+    }
+
+
+    /* Améliorations complémentaires, sans modifier le contenu de la page */
+    :root { color-scheme: dark; }
+    html { scroll-padding-top: 88px; }
+    body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    img { height: auto; }
+    button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid var(--gold2); outline-offset: 3px; }
+    section[id], main[id], footer[id] { scroll-margin-top: 88px; }
+    .navlinks a, .btn, .picker-trigger, .calendar-nav, .calendar-day, .time-choice,
+    .picker-close, .picker-actions button, .menu-btn { touch-action: manipulation; }
+    .field input, .field select, .field textarea { color-scheme: dark; }
+    .field input::placeholder, .field textarea::placeholder { color: #8f8f9a; opacity: 1; }
+    @media (max-width: 720px) {
+      .container { width: min(100% - 32px, 1160px); }
+      .nav { gap: 12px; }
+      .brand { min-width: 0; }
+      .brand span { overflow-wrap: anywhere; }
+      .booking-form, .booking-intro, .about-panel { padding: 22px; }
+      .picker-shell { padding: 14px; }
+      .calendar-weekdays, .calendar-days { gap: 4px; }
+      .calendar-day { border-radius: 9px; }
+      .whatsapp-float { bottom: max(14px, env(safe-area-inset-bottom)); }
+    }
+    @media (hover: none) {
+      .photo::after { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
+
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#accueil">
+        <img src="logo.webp" alt="Logo Deejay AM">
+        <span>DEEJAY AM</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu">☰</button>
+
+      <nav class="navlinks" id="navLinks">
+        <a href="#prestations">Prestations</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#apropos">À propos</a>
+        <a href="#avis">Avis</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#reservation">Réserver</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <div class="logo">DEEJAY <span>AM</span></div>
-    <div class="status"><span class="dot" aria-hidden="true"></span> Maintenance temporaire</div>
-    <h1>Notre site est temporairement hors ligne.</h1>
-    <p>Nous travaillons actuellement sur le site afin de vous proposer une meilleure expérience. Merci pour votre patience. Deejay AM sera de retour prochainement.</p>
-    <div class="rule" aria-hidden="true"></div>
-    <footer>© <span id="year">2026</span> Deejay AM</footer>
+    <section class="hero" id="accueil">
+      <div class="container hero-grid">
+        <div>
+          <div class="kicker"><span class="dot"></span> DJ • SON • ÉCLAIRAGE</div>
+          <h1><span class="gradient-text">DEEJAY AM</span><br>DJ à La Louvière.</h1>
+          <p class="hero-copy">DJ à La Louvière et dans le Hainaut pour anniversaires, soirées privées, mariages et événements. Sonorisation, éclairage et micros adaptés à ton événement.</p>
+          <div class="actions">
+            <a class="btn primary" href="#reservation">Réserver une date</a>
+            <a class="btn secondary" href="https://www.instagram.com/deejay__am/" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn secondary" href="https://www.tiktok.com/@deejay__am" target="_blank" rel="noopener">TikTok</a>
+            <a class="btn secondary" href="https://www.facebook.com/profile.php?id=61592766824589" target="_blank" rel="noopener">Facebook</a>
+            <a class="btn whatsapp-btn" href="https://wa.me/32465764109?text=Bonjour%2C%20je%20souhaiterais%20avoir%20des%20informations%20pour%20une%20prestation%20Deejay%20AM." target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+
+          <div class="chips">
+            <span class="chip">Anniversaires</span>
+            <span class="chip">Soirées privées</span>
+            <span class="chip">Événements</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img src="profil.webp" alt="Deejay AM">
+          <div class="hero-card-label">
+            <strong>Deejay AM</strong>
+            <span>Infos & booking • info@deejayam.com</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="prestations">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Prestations</div>
+            <h2>Tout ce qu’il faut pour l’ambiance.</h2>
+            <p>Le contenu s’adapte à ton événement, à la salle et au public. Pas besoin d’un catalogue de 74 options incompréhensibles.</p>
+          </div>
+        </div>
+
+        <div class="services">
+          <article class="card reveal">
+            <div class="card-num">01</div>
+            <h3>DJ Set</h3>
+            <p>Musique et enchaînements adaptés au type de soirée et aux invités.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-num">02</div>
+            <h3>Sonorisation</h3>
+            <p>Installation et diffusion du son selon la salle et les besoins.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-num">03</div>
+            <h3>Éclairage</h3>
+            <p>Jeux de lumière pour accompagner la piste et l’ambiance générale.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-num">04</div>
+            <h3>Micro</h3>
+            <p>Micro disponible pour annonces, discours et animations.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="galerie">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Galerie</div>
+            <h2>Quelques installations.</h2>
+            <p>Clique sur une photo pour l’agrandir.</p>
+          </div>
+        </div>
+
+        <div class="gallery">
+          <button class="photo reveal" data-full="gallery3.webp" aria-label="Agrandir la photo d'ambiance">
+            <img src="gallery3.webp" alt="Ambiance d'une prestation Deejay AM" loading="lazy">
+            <span>Ambiance</span>
+          </button>
+
+          <button class="photo reveal" data-full="gallery1.webp" aria-label="Agrandir la photo du setup">
+            <img src="gallery1.webp" alt="Setup Deejay AM" loading="lazy">
+            <span>Setup</span>
+          </button>
+
+          <button class="photo reveal" data-full="gallery2.webp" aria-label="Agrandir la photo du matériel">
+            <img src="gallery2.webp" alt="Matériel DJ Deejay AM" loading="lazy">
+            <span>Matériel</span>
+          </button>
+
+          <button class="photo reveal" data-full="gallery4.webp" aria-label="Agrandir la photo de l'installation">
+            <img src="gallery4.webp" alt="Installation Deejay AM" loading="lazy">
+            <span>Installation</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="apropos">
+      <div class="container about">
+        <div class="profile-panel reveal">
+          <img src="profil.webp" alt="Portrait Deejay AM" loading="lazy">
+          <div class="profile-meta">
+            <strong>Deejay AM</strong>
+            <a href="mailto:info@deejayam.com">info@deejayam.com</a><br>
+            <a href="https://www.instagram.com/deejay__am/" target="_blank" rel="noopener">Instagram : @deejay__am</a><br>
+            <a href="https://www.tiktok.com/@deejay__am" target="_blank" rel="noopener">TikTok : @deejay__am</a>
+          </div>
+        </div>
+
+        <div class="about-panel reveal">
+          <div class="eyebrow">À propos</div>
+          <h2>Moi, c’est Aleandro.</h2>
+          <p>J’ai 16 ans et je suis derrière Deejay AM. Passionné par la musique et l’animation, je propose des prestations DJ pour les anniversaires, soirées privées et événements.</p>
+          <p>Mon objectif est simple : créer une bonne ambiance et adapter la musique au public et au déroulement de la soirée. La sonorisation, l’éclairage et le matériel nécessaire font partie de la prestation selon l’événement.</p>
+          <p>Pour une réservation, indique le lieu, la date, le type d’événement et les informations utiles. Je réponds directement par e-mail, Instagram, TikTok, Facebook ou WhatsApp.</p>
+
+          <div class="about-actions">
+            <a class="btn primary" href="#reservation">Demander une date</a>
+            <a class="btn secondary" href="https://www.instagram.com/deejay__am/" target="_blank" rel="noopener">Voir Instagram</a>
+            <a class="btn secondary" href="https://www.tiktok.com/@deejay__am" target="_blank" rel="noopener">Voir TikTok</a>
+            <a class="btn secondary" href="https://www.facebook.com/profile.php?id=61592766824589" target="_blank" rel="noopener">Voir Facebook</a>
+            <a class="btn whatsapp-btn" href="https://wa.me/32465764109?text=Bonjour%2C%20je%20souhaiterais%20avoir%20des%20informations%20pour%20une%20prestation%20Deejay%20AM." target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="avis">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Avis</div>
+            <h2>Ils ont fait confiance à Deejay AM.</h2>
+            <p>Quelques retours de clients après leurs événements.</p>
+          </div>
+        </div>
+
+        <div class="reviews-grid">
+          <article class="review-card reveal">
+            <div class="review-top">
+              <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+            </div>
+            <p class="review-text">“Bonne prestation, musique bien adaptée aux invités et bonne ambiance pendant toute la soirée. L’installation était propre et tout s’est déroulé comme prévu.”</p>
+            <div class="review-author">
+              <strong>Philippe V.</strong>
+              <span>Client</span>
+            </div>
+          </article>
+
+          <article class="review-card reveal">
+            <div class="review-top">
+              <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+            </div>
+            <p class="review-text">“Très bonne soirée avec Deejay AM. Les demandes musicales ont été prises en compte et l’ambiance est restée bonne jusqu’à la fin. Contact facile et organisation sérieuse.”</p>
+            <div class="review-author">
+              <strong>Vincent L.</strong>
+              <span>Client</span>
+            </div>
+          </article>
+
+          <article class="review-card reveal">
+            <div class="review-top">
+              <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+            </div>
+            <p class="review-text">“Nous avons passé une bonne soirée. La musique convenait aux différents âges présents et les moments importants ont été bien accompagnés. Merci pour la prestation.”</p>
+            <div class="review-author">
+              <strong>Laurence L.</strong>
+              <span>Cliente</span>
+            </div>
+          </article>
+
+          <article class="review-card reveal">
+            <div class="review-top">
+              <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+            </div>
+            <p class="review-text">“Bonne organisation et bonne sélection musicale. Le son et les lumières ont donné une belle ambiance à la soirée. Je recommande pour un anniversaire ou une soirée privée.”</p>
+            <div class="review-author">
+              <strong>Jason L.</strong>
+              <span>Client</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="review-actions reveal">
+          <a class="btn primary" href="https://g.page/r/Cbnhlpb70tFQEAE/review" target="_blank" rel="noopener noreferrer">★★★★★ Laisser un avis sur Google</a>
+          <a class="btn secondary"
+             href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3ADeejay%20AM%0AN%3AAM%3BDeejay%3B%3B%3B%0ATEL%3BTYPE%3DCELL%3A%2B32465764109%0AEMAIL%3Ainfo%40deejayam.com%0AURL%3Ahttps%3A%2F%2Fdeejayam.com%0ANOTE%3ADJ%20pour%20anniversaires%2C%20soir%C3%A9es%20priv%C3%A9es%20et%20%C3%A9v%C3%A9nements.%0AEND%3AVCARD"
+             download="Deejay-AM.vcf">Ajouter Deejay AM à mes contacts</a>
+          <a class="btn secondary"
+             href="https://www.google.com/maps/place/Deejay+AM/@50.43711,4.1089262,12z/data=!3m1!4b1!4m6!3m5!1s0x6f8513d6f0ae70e9:0x50d1d2fb9696e1b9!8m2!3d50.437139!4d4.1913257!16s%2Fg%2F11nvsb6v2h?entry=ttu&g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D"
+             target="_blank" rel="noopener noreferrer">Voir Deejay AM sur Google</a>
+        </div>
+
+        <div class="review-form reveal" id="laisser-un-avis">
+          <p class="review-help">Les avis sont publiés directement sur Google. Clique sur le bouton ci-dessus pour laisser une note et un commentaire sur la fiche Deejay AM.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="reservation">
+
+      <div class="container">
+        <div class="wia-notice reveal">
+          <span class="wia-notice-icon" aria-hidden="true">✓</span>
+          <div>
+            <strong>Avant la prestation</strong>
+            <p>Le client doit se rendre sur le site Working in the Arts et déclarer Deejay AM.</p>
+          </div>
+          <a href="https://www.workinginthearts.be/" target="_blank" rel="noopener">Working in the Arts</a>
+        </div>
+      </div>
+
+      <div class="container booking">
+        <div class="booking-intro reveal">
+          <div>
+            <div class="eyebrow">Booking</div>
+            <h2>Prépare ta demande.</h2>
+            <p>Remplis le formulaire directement sur le site. Après l’envoi, je reçois les informations sur info@deejayam.com.</p>
+          </div>
+
+          <div class="contact-list">
+            <a class="contact-link" href="mailto:info@deejayam.com">
+              <span>E-mail</span>
+              <span>info@deejayam.com</span>
+            </a>
+            <a class="contact-link" href="https://www.instagram.com/deejay__am/" target="_blank" rel="noopener">
+              <span>Instagram</span>
+              <span>@deejay__am</span>
+            </a>
+            <a class="contact-link" href="https://www.tiktok.com/@deejay__am" target="_blank" rel="noopener">
+              <span>TikTok</span>
+              <span>@deejay__am</span>
+            </a>
+            <a class="contact-link" href="https://www.facebook.com/profile.php?id=61592766824589" target="_blank" rel="noopener">
+              <span>Facebook</span>
+              <span>Deejay AM</span>
+            </a>
+            <a class="contact-link whatsapp-contact" href="https://wa.me/32465764109?text=Bonjour%2C%20je%20souhaiterais%20avoir%20des%20informations%20pour%20une%20prestation%20Deejay%20AM." target="_blank" rel="noopener">
+              <span>WhatsApp</span>
+              <span>+32 465 76 41 09</span>
+            </a>
+          </div>
+        </div>
+
+        <form class="booking-form reveal"
+              action="https://formsubmit.co/info@deejayam.com"
+              method="POST">
+
+          <input type="hidden" name="_subject" value="Nouvelle demande de réservation - Deejay AM">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://deejayam.com/merci.html">
+          <input type="hidden" name="_autoresponse" value="Merci pour ta demande auprès de Deejay AM. J’ai bien reçu les informations de ton événement. Je te répondrai dès que possible.">
+
+          <div class="honeypot" aria-hidden="true">
+            <label for="website">Ne pas remplir ce champ</label>
+            <input type="text" id="website" name="_honey" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="fullname">Nom et prénom *</label>
+              <input id="fullname"
+                     name="Nom et prénom"
+                     autocomplete="name"
+                     placeholder="Jean Dupont"
+                     required>
+            </div>
+
+            <div class="field">
+              <label for="phone">Numéro de téléphone *</label>
+              <input id="phone"
+                     name="Téléphone"
+                     type="tel"
+                     inputmode="tel"
+                     autocomplete="tel"
+                     placeholder="0470 12 34 56"
+                     required>
+            </div>
+
+            <div class="field">
+              <label for="email">Adresse e-mail *</label>
+              <input id="email"
+                     name="email"
+                     type="email"
+                     autocomplete="email"
+                     placeholder="exemple@email.com"
+                     required>
+            </div>
+
+            <div class="field">
+              <label for="type">Type d’événement *</label>
+              <select id="type" name="Type d’événement" required>
+                <option value="">Choisir</option>
+                <option value="Anniversaire">Anniversaire</option>
+                <option value="Mariage">Mariage</option>
+                <option value="Fiançailles">Fiançailles</option>
+                <option value="Crémaillère">Crémaillère</option>
+                <option value="Soirée privée">Soirée privée</option>
+                <option value="Fête de famille">Fête de famille</option>
+                <option value="Baptême">Baptême</option>
+                <option value="Communion">Communion</option>
+                <option value="Fête de naissance">Fête de naissance</option>
+                <option value="Baby shower">Baby shower</option>
+                <option value="Gender reveal">Gender reveal</option>
+                <option value="Départ à la retraite">Départ à la retraite</option>
+                <option value="Remise de diplôme">Remise de diplôme</option>
+                <option value="Soirée étudiante">Soirée étudiante</option>
+                <option value="Bal">Bal</option>
+                <option value="Gala">Gala</option>
+                <option value="Soirée d’entreprise">Soirée d’entreprise</option>
+                <option value="Team building">Team building</option>
+                <option value="Inauguration">Inauguration</option>
+                <option value="Événement associatif">Événement associatif</option>
+                <option value="Événement communal">Événement communal</option>
+                <option value="Fête de quartier">Fête de quartier</option>
+                <option value="Festival / fête">Festival / fête</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="dateTrigger">Date de l’événement *</label>
+              <input id="dateValue" name="Date" type="hidden">
+
+              <button class="picker-trigger"
+                      id="dateTrigger"
+                      type="button">
+                <span id="dateText" class="picker-placeholder">Choisir une date</span>
+                <span class="picker-icon" aria-hidden="true">▦</span>
+              </button>
+
+              <div class="picker-error" id="dateError" aria-live="polite"></div>
+            </div>
+
+            <div class="field">
+              <label for="guests">Nombre d’invités</label>
+              <input id="guests"
+                     name="Nombre d’invités"
+                     type="number"
+                     min="1"
+                     inputmode="numeric"
+                     placeholder="80">
+            </div>
+
+            <div class="field">
+              <label for="startTrigger">Heure de début</label>
+              <input id="startValue" name="Heure de début" type="hidden">
+
+              <button class="picker-trigger time-trigger"
+                      id="startTrigger"
+                      type="button"
+                      data-time-target="start">
+                <span id="startText" class="picker-placeholder">Choisir l’heure</span>
+                <span class="picker-icon" aria-hidden="true">◷</span>
+              </button>
+            </div>
+
+            <div class="field">
+              <label for="endTrigger">Heure de fin</label>
+              <input id="endValue" name="Heure de fin" type="hidden">
+
+              <button class="picker-trigger time-trigger"
+                      id="endTrigger"
+                      type="button"
+                      data-time-target="end">
+                <span id="endText" class="picker-placeholder">Choisir l’heure</span>
+                <span class="picker-icon" aria-hidden="true">◷</span>
+              </button>
+            </div>
+
+            <div class="field full">
+              <label for="location">Lieu de l’événement *</label>
+
+              <div class="location-autocomplete-wrap">
+                <div class="location-search">
+                  <input id="location"
+                         name="Lieu"
+                         autocomplete="off"
+                         placeholder="Commence à taper une adresse ou le nom d’une salle"
+                         aria-autocomplete="list"
+                         aria-controls="addressSuggestions"
+                         aria-expanded="false"
+                         required>
+
+                  <input type="hidden" id="mapsLinkValue" name="Lien Google Maps" value="">
+                  <input type="hidden" id="locationLatitude" name="Latitude" value="">
+                  <input type="hidden" id="locationLongitude" name="Longitude" value="">
+
+                  <button class="maps-search-btn"
+                          id="mapsSearchBtn"
+                          type="button"
+                          aria-label="Ouvrir ce lieu sur Google Maps">
+                    <span class="maps-search-icon" aria-hidden="true">⌖</span>
+                    <span>Google Maps</span>
+                  </button>
+                </div>
+
+                <div class="address-suggestions"
+                     id="addressSuggestions"
+                     role="listbox"
+                     aria-label="Suggestions d’adresses"
+                     hidden></div>
+              </div>
+
+              <div class="location-search-hint">
+                Tape quelques lettres puis choisis l’adresse exacte dans la liste. L’adresse sélectionnée et son lien Google Maps seront ajoutés au mail.
+              </div>
+            </div>
+
+            <div class="field full">
+              <label for="music">Styles de musique souhaités</label>
+              <input id="music"
+                     name="Styles de musique"
+                     placeholder="Commercial, années 80, house, rap...">
+            </div>
+
+            <div class="field full">
+              <label>Animations et options souhaitées</label>
+
+              <div class="service-choice-grid">
+
+                <label class="service-choice">
+                  <input type="checkbox" name="Animation musicale" value="Demandée">
+                  <span class="service-choice-body">
+                    <span class="service-choice-icon" aria-hidden="true">🎧</span>
+                    <span class="service-choice-text">
+                      <strong>Animation musicale</strong>
+                      <small>Mix, ambiance et gestion musicale de la soirée</small>
+                    </span>
+                    <span class="service-choice-check" aria-hidden="true">✓</span>
+                  </span>
+                </label>
+
+                <label class="service-choice">
+                  <input type="checkbox" name="Animation micro" value="Demandée">
+                  <span class="service-choice-body">
+                    <span class="service-choice-icon" aria-hidden="true">🎤</span>
+                    <span class="service-choice-text">
+                      <strong>Animation au micro</strong>
+                      <small>Annonces, présentation et interaction avec les invités</small>
+                    </span>
+                    <span class="service-choice-check" aria-hidden="true">✓</span>
+                  </span>
+                </label>
+
+                <label class="service-choice">
+                  <input type="checkbox" name="Moments spéciaux" value="Demandés">
+                  <span class="service-choice-body">
+                    <span class="service-choice-icon" aria-hidden="true">✨</span>
+                    <span class="service-choice-text">
+                      <strong>Moments spéciaux</strong>
+                      <small>Entrée, gâteau, surprise ou moment à mettre en avant</small>
+                    </span>
+                    <span class="service-choice-check" aria-hidden="true">✓</span>
+                  </span>
+                </label>
+
+                <label class="service-choice">
+                  <input type="checkbox" name="Demande personnalisée" value="Oui">
+                  <span class="service-choice-body">
+                    <span class="service-choice-icon" aria-hidden="true">⚙️</span>
+                    <span class="service-choice-text">
+                      <strong>Demande personnalisée</strong>
+                      <small>Besoin ou idée particulière à préciser dans le message</small>
+                    </span>
+                    <span class="service-choice-check" aria-hidden="true">✓</span>
+                  </span>
+                </label>
+
+              </div>
+            </div>
+
+            <div class="field full">
+              <label for="message">Informations supplémentaires</label>
+              <textarea id="message"
+                        name="Message"
+                        placeholder="Horaires particuliers, ambiance recherchée, déroulement de la soirée, informations utiles..."></textarea>
+            </div>
+
+            <div class="field full">
+              <label class="consent">
+                <input type="checkbox"
+                       name="Autorisation de contact"
+                       value="Oui"
+                       required>
+                <span>J’accepte d’être recontacté au sujet de cette demande. *</span>
+              </label>
+            </div>
+
+            <div class="field full submit-row">
+              <button class="btn primary" type="submit">Envoyer ma demande</button>
+              <div class="form-note">
+                Tes informations sont envoyées directement à Deejay AM.
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">FAQ</div>
+            <h2>Questions rapides.</h2>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details class="reveal">
+            <summary>Comment demander une réservation ?</summary>
+            <p>Remplis le formulaire du site. La demande arrive directement sur info@deejayam.com. Tu peux aussi me retrouver sur Instagram et TikTok @deejay__am, sur la page Facebook Deejay AM ou par WhatsApp au +32 465 76 41 09.</p>
+          </details>
+
+          <details class="reveal">
+            <summary>Quelles informations envoyer ?</summary>
+            <p>La date, le lieu, le type d’événement, les horaires et les informations utiles sur la soirée.</p>
+          </details>
+
+          <details class="reveal">
+            <summary>Peut-on préciser les styles de musique souhaités ?</summary>
+            <p>Oui. Tu peux indiquer les styles, artistes ou ambiances souhaités directement dans le formulaire de réservation.</p>
+          </details>
+
+          <details class="reveal">
+            <summary>Comment voir les prestations ?</summary>
+            <p>La galerie présente plusieurs installations. Tu peux cliquer sur chaque photo pour l’afficher en grand.</p>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="container footer-row">
+      <span>© 2026 Deejay AM</span>
+      <span>deejayam.com • info@deejayam.com • <a href="https://www.tiktok.com/@deejay__am" target="_blank" rel="noopener">TikTok</a> • <a href="https://www.facebook.com/profile.php?id=61592766824589" target="_blank" rel="noopener">Facebook</a> • <a href="https://wa.me/32465764109?text=Bonjour%2C%20je%20souhaiterais%20avoir%20des%20informations%20pour%20une%20prestation%20Deejay%20AM." target="_blank" rel="noopener">WhatsApp</a> • <a class="admin-link" href="https://admin.deejayam.com" target="_blank" rel="noopener noreferrer">⚙️ Back office</a></span>
+    </div>
+  </footer>
+
+
+  <dialog class="picker-dialog" id="dateDialog">
+    <div class="picker-shell">
+      <div class="picker-top">
+        <strong>Choisir une date</strong>
+        <button class="picker-close" id="dateClose" type="button" aria-label="Fermer">×</button>
+      </div>
+
+      <div class="calendar-head">
+        <button class="calendar-nav" id="calendarPrev" type="button" aria-label="Mois précédent">‹</button>
+        <div class="calendar-title" id="calendarTitle"></div>
+        <button class="calendar-nav" id="calendarNext" type="button" aria-label="Mois suivant">›</button>
+      </div>
+
+      <div class="calendar-weekdays" aria-hidden="true">
+        <span>Lu</span><span>Ma</span><span>Me</span><span>Je</span><span>Ve</span><span>Sa</span><span>Di</span>
+      </div>
+
+      <div class="calendar-days" id="calendarDays"></div>
+    </div>
+  </dialog>
+
+  <dialog class="picker-dialog" id="timeDialog">
+    <div class="picker-shell">
+      <div class="picker-top">
+        <strong id="timeDialogTitle">Choisir une heure</strong>
+        <button class="picker-close" id="timeClose" type="button" aria-label="Fermer">×</button>
+      </div>
+
+      <div class="time-display" aria-live="polite">
+        <div class="time-box" id="timeHourDisplay">20</div>
+        <div class="time-colon">:</div>
+        <div class="time-box" id="timeMinuteDisplay">00</div>
+      </div>
+
+      <div class="time-section-label">Heure</div>
+      <div class="time-grid" id="hourGrid"></div>
+
+      <div class="time-section-label">Minutes</div>
+      <div class="time-grid minute-grid" id="minuteGrid"></div>
+
+      <div class="picker-actions">
+        <button class="picker-cancel" id="timeCancel" type="button">Annuler</button>
+        <button class="picker-confirm" id="timeConfirm" type="button">Choisir cette heure</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button id="closeLightbox" aria-label="Fermer">×</button>
+    <img id="lightboxImg" alt="">
+  </div>
+
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+
+    // Sélecteur de date
+    const bookingForm = document.querySelector('.booking-form');
+    const dateTrigger = document.getElementById('dateTrigger');
+    const dateDialog = document.getElementById('dateDialog');
+    const dateClose = document.getElementById('dateClose');
+    const dateValue = document.getElementById('dateValue');
+    const dateText = document.getElementById('dateText');
+    const dateError = document.getElementById('dateError');
+    const calendarTitle = document.getElementById('calendarTitle');
+    const calendarDays = document.getElementById('calendarDays');
+    const calendarPrev = document.getElementById('calendarPrev');
+    const calendarNext = document.getElementById('calendarNext');
+
+    const nowForPicker = new Date();
+    const pickerToday = new Date(
+      nowForPicker.getFullYear(),
+      nowForPicker.getMonth(),
+      nowForPicker.getDate()
+    );
+
+    let pickerMonth = new Date(
+      pickerToday.getFullYear(),
+      pickerToday.getMonth(),
+      1
+    );
+
+    let pickedDate = null;
+    const availabilityUrl = 'https://script.google.com/macros/s/AKfycbx0JBVn5nW0lvE6IH9h7KBNTZIKT1S5Gav8vgy5inrF_zQqjg_4OiqYgWQmpLnTjJ_uxw/exec';
+    let blockedDates = new Set();
+    let blockedDatesLoaded = false;
+
+    async function loadBlockedDates(){
+      try{
+        const response = await fetch(availabilityUrl, { cache: 'no-store' });
+        if(!response.ok) throw new Error('Réponse calendrier invalide');
+        const data = await response.json();
+        if(data && data.success && Array.isArray(data.datesBloquees)){
+          blockedDates = new Set(data.datesBloquees);
+          blockedDatesLoaded = true;
+          renderDateCalendar();
+        }
+      }catch(error){
+        console.warn('Dates indisponibles non chargées :', error);
+      }
+    }
+
+    const monthFormat = new Intl.DateTimeFormat('fr-BE', {
+      month: 'long',
+      year: 'numeric'
+    });
+
+    const fullDateFormat = new Intl.DateTimeFormat('fr-BE', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    function formatIsoDate(date){
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function isSameDay(a,b){
+      return !!a && !!b &&
+        a.getFullYear() === b.getFullYear() &&
+        a.getMonth() === b.getMonth() &&
+        a.getDate() === b.getDate();
+    }
+
+    function renderDateCalendar(){
+      calendarTitle.textContent = monthFormat.format(pickerMonth);
+      calendarDays.innerHTML = '';
+
+      const year = pickerMonth.getFullYear();
+      const month = pickerMonth.getMonth();
+      const firstDay = new Date(year, month, 1);
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const blanks = (firstDay.getDay() + 6) % 7;
+
+      for(let i = 0; i < blanks; i++){
+        const empty = document.createElement('span');
+        empty.className = 'calendar-empty';
+        calendarDays.appendChild(empty);
+      }
+
+      for(let day = 1; day <= totalDays; day++){
+        const date = new Date(year, month, day);
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'calendar-day';
+        button.textContent = day;
+        button.setAttribute('aria-label', fullDateFormat.format(date));
+
+        if(date < pickerToday){
+          button.disabled = true;
+        }
+
+        const isoDate = formatIsoDate(date);
+        if(blockedDates.has(isoDate)){
+          button.disabled = true;
+          button.classList.add('booked');
+          button.setAttribute('aria-label', fullDateFormat.format(date) + ' - Indisponible');
+          button.title = 'Date déjà réservée';
+        }
+
+        if(isSameDay(date, pickerToday)){
+          button.classList.add('today');
+        }
+
+        if(isSameDay(date, pickedDate)){
+          button.classList.add('selected');
+        }
+
+        button.addEventListener('click', () => {
+          pickedDate = date;
+          dateValue.value = formatIsoDate(date);
+          dateText.textContent = fullDateFormat.format(date);
+          dateText.classList.remove('picker-placeholder');
+          dateError.textContent = '';
+          dateDialog.close();
+        });
+
+        calendarDays.appendChild(button);
+      }
+
+      const previousMonthLastDay = new Date(year, month, 0);
+      calendarPrev.disabled = previousMonthLastDay < pickerToday;
+    }
+
+    if(dateTrigger && dateDialog){
+      loadBlockedDates();
+      dateTrigger.addEventListener('click', () => {
+        loadBlockedDates();
+        renderDateCalendar();
+        if(typeof dateDialog.showModal === 'function'){
+          dateDialog.showModal();
+        } else {
+          dateDialog.setAttribute('open','');
+        }
+      });
+
+      dateClose.addEventListener('click', () => dateDialog.close());
+
+      dateDialog.addEventListener('click', (event) => {
+        const rect = dateDialog.getBoundingClientRect();
+        const inside =
+          event.clientX >= rect.left &&
+          event.clientX <= rect.right &&
+          event.clientY >= rect.top &&
+          event.clientY <= rect.bottom;
+
+        if(!inside){
+          dateDialog.close();
+        }
+      });
+
+      calendarPrev.addEventListener('click', () => {
+        pickerMonth = new Date(
+          pickerMonth.getFullYear(),
+          pickerMonth.getMonth() - 1,
+          1
+        );
+        renderDateCalendar();
+      });
+
+      calendarNext.addEventListener('click', () => {
+        pickerMonth = new Date(
+          pickerMonth.getFullYear(),
+          pickerMonth.getMonth() + 1,
+          1
+        );
+        renderDateCalendar();
+      });
+    }
+
+    // Sélecteur d'heure
+    const timeDialog = document.getElementById('timeDialog');
+    const timeClose = document.getElementById('timeClose');
+    const timeCancel = document.getElementById('timeCancel');
+    const timeConfirm = document.getElementById('timeConfirm');
+    const timeDialogTitle = document.getElementById('timeDialogTitle');
+    const timeHourDisplay = document.getElementById('timeHourDisplay');
+    const timeMinuteDisplay = document.getElementById('timeMinuteDisplay');
+    const hourGrid = document.getElementById('hourGrid');
+    const minuteGrid = document.getElementById('minuteGrid');
+
+    let activeTimeTarget = 'start';
+    let selectedHour = 20;
+    let selectedMinute = 0;
+
+    const timeValues = {
+      start: '',
+      end: ''
+    };
+
+    function renderTimeChoices(){
+      hourGrid.innerHTML = '';
+      minuteGrid.innerHTML = '';
+
+      for(let hour = 0; hour < 24; hour++){
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'time-choice';
+        button.textContent = String(hour).padStart(2,'0');
+
+        if(hour === selectedHour){
+          button.classList.add('selected');
+        }
+
+        button.addEventListener('click', () => {
+          selectedHour = hour;
+          timeHourDisplay.textContent = String(hour).padStart(2,'0');
+          renderTimeChoices();
+        });
+
+        hourGrid.appendChild(button);
+      }
+
+      [0,15,30,45].forEach(minute => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'time-choice';
+        button.textContent = String(minute).padStart(2,'0');
+
+        if(minute === selectedMinute){
+          button.classList.add('selected');
+        }
+
+        button.addEventListener('click', () => {
+          selectedMinute = minute;
+          timeMinuteDisplay.textContent = String(minute).padStart(2,'0');
+          renderTimeChoices();
+        });
+
+        minuteGrid.appendChild(button);
+      });
+    }
+
+    function openTimePicker(target){
+      activeTimeTarget = target;
+
+      const existing = timeValues[target];
+      if(existing){
+        const [h,m] = existing.split(':').map(Number);
+        selectedHour = h;
+        selectedMinute = m;
+      } else {
+        selectedHour = target === 'start' ? 20 : 2;
+        selectedMinute = 0;
+      }
+
+      timeDialogTitle.textContent =
+        target === 'start' ? 'Heure de début' : 'Heure de fin';
+
+      timeHourDisplay.textContent = String(selectedHour).padStart(2,'0');
+      timeMinuteDisplay.textContent = String(selectedMinute).padStart(2,'0');
+
+      renderTimeChoices();
+
+      if(typeof timeDialog.showModal === 'function'){
+        timeDialog.showModal();
+      } else {
+        timeDialog.setAttribute('open','');
+      }
+    }
+
+    document.querySelectorAll('.time-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        openTimePicker(trigger.dataset.timeTarget);
+      });
+    });
+
+    timeClose.addEventListener('click', () => timeDialog.close());
+    timeCancel.addEventListener('click', () => timeDialog.close());
+
+    timeConfirm.addEventListener('click', () => {
+      const value =
+        String(selectedHour).padStart(2,'0') + ':' +
+        String(selectedMinute).padStart(2,'0');
+
+      timeValues[activeTimeTarget] = value;
+
+      const hidden = document.getElementById(activeTimeTarget + 'Value');
+      const text = document.getElementById(activeTimeTarget + 'Text');
+
+      hidden.value = value;
+      text.textContent = value;
+      text.classList.remove('picker-placeholder');
+
+      timeDialog.close();
+    });
+
+    timeDialog.addEventListener('click', (event) => {
+      const rect = timeDialog.getBoundingClientRect();
+      const inside =
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom;
+
+      if(!inside){
+        timeDialog.close();
+      }
+    });
+
+    // La date reste obligatoire avant l'envoi.
+    if(bookingForm){
+      bookingForm.addEventListener('submit', (event) => {
+        if(!dateValue.value){
+          event.preventDefault();
+          dateError.textContent = 'Choisis la date de l’événement.';
+          dateTrigger.focus();
+          renderDateCalendar();
+
+          if(typeof dateDialog.showModal === 'function'){
+            dateDialog.showModal();
+          } else {
+            dateDialog.setAttribute('open','');
+          }
+        }
+      });
+    }
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeLightbox = document.getElementById('closeLightbox');
+
+    document.querySelectorAll('.photo').forEach(photo => {
+      photo.addEventListener('click', () => {
+        lightboxImg.src = photo.dataset.full;
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function closeBox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImg.src = '';
+    }
+
+    closeLightbox.addEventListener('click', closeBox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeBox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBox();
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  
+    // V20 : menu actif uniquement, sans suivi de souris ni recalcul permanent au scroll.
+    const premiumLinks=[...document.querySelectorAll('.navlinks a[href^="#"]')];
+    const premiumSections=premiumLinks
+      .map(a=>document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    if(premiumSections.length){
+      const premiumObserver=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            premiumLinks.forEach(a=>{
+              a.classList.toggle(
+                'active',
+                a.getAttribute('href')==='#'+entry.target.id
+              );
+            });
+          }
+        });
+      },{rootMargin:'-35% 0px -55% 0px',threshold:0});
+
+      premiumSections.forEach(s=>premiumObserver.observe(s));
+    }
+
+  
+    // V23 : suggestions d'adresses en direct + lien Google Maps exact dans le mail.
+    const locationInput = document.getElementById('location');
+    const mapsSearchBtn = document.getElementById('mapsSearchBtn');
+    const mapsLinkValue = document.getElementById('mapsLinkValue');
+    const locationLatitude = document.getElementById('locationLatitude');
+    const locationLongitude = document.getElementById('locationLongitude');
+    const addressSuggestions = document.getElementById('addressSuggestions');
+
+    const buildMapsSearchUrl = (query) =>
+      'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query.trim());
+
+    if(locationInput && mapsSearchBtn && mapsLinkValue && locationLatitude && locationLongitude && addressSuggestions){
+      let debounceTimer = null;
+      let requestController = null;
+      let currentSuggestions = [];
+      let activeSuggestionIndex = -1;
+
+      const closeSuggestions = () => {
+        addressSuggestions.hidden = true;
+        addressSuggestions.innerHTML = '';
+        currentSuggestions = [];
+        activeSuggestionIndex = -1;
+        locationInput.setAttribute('aria-expanded','false');
+      };
+
+      const formatFeature = (feature) => {
+        const p = feature.properties || {};
+        const coords = feature.geometry?.coordinates || [];
+        const city = p.city || p.locality || p.district || p.county || '';
+        const street = [p.street,p.housenumber].filter(Boolean).join(' ');
+        const locality = [p.postcode,city].filter(Boolean).join(' ');
+        const full = [...new Set([
+          p.name && p.name !== p.street ? p.name : '',
+          street, locality, p.state, p.country
+        ].filter(Boolean))].join(', ');
+
+        return {
+          title: p.name || street || full || 'Adresse',
+          subtitle: [street,locality,p.country].filter(Boolean).join(', '),
+          label: full || [street,locality,p.country].filter(Boolean).join(', '),
+          lon: coords[0],
+          lat: coords[1]
+        };
+      };
+
+      const setSelectedAddress = (item) => {
+        locationInput.value = item.label;
+        locationLatitude.value = item.lat ?? '';
+        locationLongitude.value = item.lon ?? '';
+        mapsLinkValue.value =
+          item.lat != null && item.lon != null
+            ? 'https://www.google.com/maps/search/?api=1&query=' +
+              encodeURIComponent(`${item.lat},${item.lon}`)
+            : buildMapsSearchUrl(item.label);
+        mapsSearchBtn.disabled = false;
+        closeSuggestions();
+      };
+
+      const renderSuggestions = (items) => {
+        addressSuggestions.innerHTML = '';
+        currentSuggestions = items;
+        activeSuggestionIndex = -1;
+
+        if(!items.length){
+          addressSuggestions.innerHTML =
+            '<div class="address-suggestions-status">Aucune adresse trouvée.</div>';
+          addressSuggestions.hidden = false;
+          locationInput.setAttribute('aria-expanded','true');
+          return;
+        }
+
+        items.forEach((item,index) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'address-suggestion';
+          button.setAttribute('role','option');
+
+          const pin = document.createElement('span');
+          pin.className = 'address-pin';
+          pin.textContent = '⌖';
+
+          const text = document.createElement('span');
+          text.className = 'address-suggestion-main';
+
+          const title = document.createElement('span');
+          title.className = 'address-suggestion-title';
+          title.textContent = item.title;
+
+          const sub = document.createElement('span');
+          sub.className = 'address-suggestion-sub';
+          sub.textContent = item.subtitle || item.label;
+
+          text.append(title,sub);
+          button.append(pin,text);
+          button.addEventListener('mousedown',(event)=>{
+            event.preventDefault();
+            setSelectedAddress(item);
+          });
+          addressSuggestions.appendChild(button);
+        });
+
+        addressSuggestions.hidden = false;
+        locationInput.setAttribute('aria-expanded','true');
+      };
+
+      const updateActiveSuggestion = () => {
+        const buttons = [...addressSuggestions.querySelectorAll('.address-suggestion')];
+        buttons.forEach((button,index)=>{
+          const active = index === activeSuggestionIndex;
+          button.classList.toggle('active',active);
+          button.setAttribute('aria-selected',active ? 'true' : 'false');
+          if(active) button.scrollIntoView({block:'nearest'});
+        });
+      };
+
+      const fetchAddressSuggestions = async (query) => {
+        if(requestController) requestController.abort();
+        requestController = new AbortController();
+
+        addressSuggestions.innerHTML =
+          '<div class="address-suggestions-status">Recherche des adresses…</div>';
+        addressSuggestions.hidden = false;
+        locationInput.setAttribute('aria-expanded','true');
+
+        const endpoint =
+          'https://photon.komoot.io/api/?' +
+          new URLSearchParams({
+            q: query,
+            limit: '6',
+            lang: 'fr',
+            countrycode: 'BE',
+            lat: '50.50',
+            lon: '4.47',
+            zoom: '8',
+            location_bias_scale: '0.35'
+          }).toString();
+
+        try{
+          const response = await fetch(endpoint,{
+            signal:requestController.signal,
+            headers:{'Accept':'application/json'}
+          });
+          if(!response.ok) throw new Error('Recherche indisponible');
+
+          const data = await response.json();
+          const items = (data.features || [])
+            .map(formatFeature)
+            .filter(item => item.label && item.lat != null && item.lon != null);
+
+          const seen = new Set();
+          renderSuggestions(items.filter(item=>{
+            const key = `${item.label}|${item.lat}|${item.lon}`;
+            if(seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          }));
+        }catch(error){
+          if(error.name === 'AbortError') return;
+          addressSuggestions.innerHTML =
+            '<div class="address-suggestions-status">Suggestions momentanément indisponibles. Tu peux continuer à saisir l’adresse manuellement.</div>';
+          addressSuggestions.hidden = false;
+          locationInput.setAttribute('aria-expanded','true');
+        }
+      };
+
+      const onLocationInput = () => {
+        const query = locationInput.value.trim();
+        locationLatitude.value = '';
+        locationLongitude.value = '';
+        mapsLinkValue.value = query.length >= 2 ? buildMapsSearchUrl(query) : '';
+        mapsSearchBtn.disabled = query.length < 2;
+        clearTimeout(debounceTimer);
+
+        if(query.length < 3){
+          closeSuggestions();
+          return;
+        }
+
+        debounceTimer = setTimeout(()=>fetchAddressSuggestions(query),350);
+      };
+
+      locationInput.addEventListener('input',onLocationInput);
+
+      locationInput.addEventListener('keydown',(event)=>{
+        if(addressSuggestions.hidden || !currentSuggestions.length) return;
+
+        if(event.key === 'ArrowDown'){
+          event.preventDefault();
+          activeSuggestionIndex = (activeSuggestionIndex + 1) % currentSuggestions.length;
+          updateActiveSuggestion();
+        }else if(event.key === 'ArrowUp'){
+          event.preventDefault();
+          activeSuggestionIndex = activeSuggestionIndex <= 0
+            ? currentSuggestions.length - 1
+            : activeSuggestionIndex - 1;
+          updateActiveSuggestion();
+        }else if(event.key === 'Enter' && activeSuggestionIndex >= 0){
+          event.preventDefault();
+          setSelectedAddress(currentSuggestions[activeSuggestionIndex]);
+        }else if(event.key === 'Escape'){
+          closeSuggestions();
+        }
+      });
+
+      mapsSearchBtn.addEventListener('click',()=>{
+        const query = locationInput.value.trim();
+        if(query.length < 2) return;
+
+        const url =
+          locationLatitude.value && locationLongitude.value
+            ? 'https://www.google.com/maps/search/?api=1&query=' +
+              encodeURIComponent(`${locationLatitude.value},${locationLongitude.value}`)
+            : buildMapsSearchUrl(query);
+
+        window.open(url,'_blank','noopener,noreferrer');
+      });
+
+      document.addEventListener('click',(event)=>{
+        if(!addressSuggestions.contains(event.target) && event.target !== locationInput){
+          closeSuggestions();
+        }
+      });
+
+      const bookingForm = locationInput.closest('form');
+      if(bookingForm){
+        bookingForm.addEventListener('submit',()=>{
+          const query = locationInput.value.trim();
+          if(!mapsLinkValue.value && query.length >= 2){
+            mapsLinkValue.value = buildMapsSearchUrl(query);
+          }
+        });
+      }
+
+      mapsSearchBtn.disabled = locationInput.value.trim().length < 2;
+    }
+
+    // Envoie aussi la demande vers Google Calendar sans modifier FormSubmit.
+    const calendarWebhookUrl = 'https://script.google.com/macros/s/AKfycbx0JBVn5nW0lvE6IH9h7KBNTZIKT1S5Gav8vgy5inrF_zQqjg_4OiqYgWQmpLnTjJ_uxw/exec';
+    const calendarBookingForm = document.querySelector('.booking-form');
+
+    if(calendarBookingForm){
+      calendarBookingForm.addEventListener('submit', (event) => {
+        if(event.defaultPrevented) return;
+
+        const formData = new FormData(calendarBookingForm);
+        const requestedServices = [
+          'Animation musicale',
+          'Animation au micro',
+          'Moments spéciaux',
+          'Demande personnalisée'
+        ].filter(name => formData.get(name));
+
+        const payload = {
+          'Nom et prénom': formData.get('Nom et prénom') || '',
+          'Téléphone': formData.get('Téléphone') || '',
+          'Email': formData.get('email') || '',
+          'Type d’événement': formData.get('Type d’événement') || '',
+          'Date': formData.get('Date') || '',
+          'Heure de début': formData.get('Heure de début') || '',
+          'Heure de fin': formData.get('Heure de fin') || '',
+          'Lieu': formData.get('Lieu') || '',
+          'Nombre d’invités': formData.get('Nombre d’invités') || '',
+          'Services': requestedServices.join(', '),
+          'Message': formData.get('Message') || ''
+        };
+
+        navigator.sendBeacon(calendarWebhookUrl, JSON.stringify(payload));
+      });
+    }
+
+
+    // Statistiques anonymes du site pour le back-office Deejay AM.
+    const statsWebhookUrl = 'https://script.google.com/macros/s/AKfycbx0JBVn5nW0lvE6IH9h7KBNTZIKT1S5Gav8vgy5inrF_zQqjg_4OiqYgWQmpLnTjJ_uxw/exec';
+
+    function detectTrafficSource(){
+      const referrer = document.referrer || '';
+      if(!referrer) return 'Direct';
+
+      try{
+        const host = new URL(referrer).hostname.toLowerCase();
+        if(host.includes('google.')) return 'Google';
+        if(host.includes('instagram.com')) return 'Instagram';
+        if(host.includes('tiktok.com')) return 'TikTok';
+        if(host.includes('facebook.com') || host.includes('fb.com')) return 'Facebook';
+        if(host.includes('messenger.com')) return 'Messenger';
+        if(host.includes('bing.com')) return 'Bing';
+        if(host.includes('deejayam.com')) return 'Interne';
+        return host.replace(/^www\./,'') || 'Autre';
+      }catch(error){
+        return 'Autre';
+      }
+    }
+
+    function sendStat(type, value){
+      const payload = JSON.stringify({
+        _action: 'track_stat',
+        type: type,
+        page: window.location.pathname || '/',
+        value: value || ''
+      });
+
+      if(navigator.sendBeacon){
+        navigator.sendBeacon(statsWebhookUrl, payload);
+      }else{
+        fetch(statsWebhookUrl, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: payload,
+          keepalive: true
+        }).catch(()=>{});
+      }
+    }
+
+    // Une vue = un chargement de page.
+    sendStat('view', detectTrafficSource());
+
+    // Clics utiles visibles dans le back-office.
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a,button');
+      if(!link) return;
+
+      const href = (link.getAttribute('href') || '').toLowerCase();
+      const text = (link.textContent || '').trim().toLowerCase();
+      let label = '';
+
+      if(href.includes('wa.me') || text.includes('whatsapp')) label = 'WhatsApp';
+      else if(href.includes('instagram.com') || text.includes('instagram')) label = 'Instagram';
+      else if(href.includes('tiktok.com') || text.includes('tiktok')) label = 'TikTok';
+      else if(href.includes('facebook.com') || text.includes('facebook')) label = 'Facebook';
+      else if(href.includes('google.com/maps') || href.includes('g.page') || text.includes('google')) label = 'Google';
+      else if(href.includes('admin.deejayam.com') || text.includes('back office')) label = 'Back office';
+      else if(href === '#reservation' || text.includes('réserver') || text.includes('reservation')) label = 'Réserver';
+
+      if(label) sendStat('click', label);
+    }, {passive:true});
+
   </script>
+
+  <a class="whatsapp-float" href="https://wa.me/32465764109?text=Bonjour%2C%20je%20souhaiterais%20avoir%20des%20informations%20pour%20une%20prestation%20Deejay%20AM." target="_blank" rel="noopener" aria-label="Contacter Deejay AM sur WhatsApp">
+    <span class="whatsapp-float-icon" aria-hidden="true"></span>
+    <span>WhatsApp</span>
+  </a>
+
 </body>
 </html>
